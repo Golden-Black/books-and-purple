@@ -62,8 +62,12 @@ app.get("/signup", function (req, res) {
   res.render("signup");
 })
 
-app.get("/compose", function (req, res) {
-  res.render("compose");
+app.get("/writeReview", function (req, res) {
+  res.render("writeReview");
+})
+
+app.get("/credits", function(req, res){
+  res.render("credits");
 })
 
 app.post("/login", function (req, res) {

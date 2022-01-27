@@ -101,7 +101,9 @@
 
 /* Customization for Homepage*/
 .frame{
-  padding-top: 1rem !important;
+  padding-top: 2rem !important;
+  padding-bottom: 3rem !important;
+  background-color: #fdfdfc;
 }
 
 /* Customization for Signup Page*/
@@ -126,6 +128,62 @@
   margin-right: auto;
   text-align: center;
   color: white;
+}
+
+.site-footer{
+  position: block;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+/* Customization in header*/
+.body-header{
+  background-image: url("/img/background-image/signup-bg-1.png");
+}
+
+.inline-container{
+  display: inline-block;
+}
+
+/* Home page*/
+.site-newsletter{
+  margin-top: 1rem, !important;
+  margin-bottom: 2rem, !important;
+}
+
+.by{
+  color: rgb(101, 30, 182);
+  /* border: 1px #000 solid;
+  border-radius: 25%; */
+}
+
+.load-more{
+  text-decoration: underline;
+  text-align: center;
+  font-family: 'Bree Serif', serif;
+  margin-top: 1.5rem;
+}
+
+.tag-font{
+  font-family: 'Mitr', sans-serif;
+  text-shadow: 2px 1px #000000;
+}
+
+.moreArticles{
+  text-align: center;
+  font-family: 'Bree Serif', serif;
+  font-size: large;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.load-more-bottom{
+  color: rgb(236, 236, 229);
+  background-color: #977df5;
+  border: 2px rgb(12, 1, 168) solid;
+  border-radius: 12px;
 }
 
 *,
@@ -300,7 +358,7 @@ sup {
 
 a {
   color: #0d6efd;
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:hover {
   color: #0a58ca;
@@ -702,6 +760,7 @@ progress {
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
   margin-left: auto;
+  background-color: white;
 }
 
 @media (min-width: 576px) {
@@ -1231,6 +1290,16 @@ progress {
   .col-md-4 {
     flex: 0 0 auto;
     width: 33.33333333%;
+  }
+
+  .col-md-4-s{
+    flex: 0 0 auto;
+    width: 38%;
+  }
+
+  .col-md-4-lite{
+    flex: 0 0 auto;
+    width: 24%;
   }
 
   .col-md-5 {
@@ -3993,6 +4062,7 @@ textarea.form-control-lg {
   color: #0d6efd;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  font-family: 'Cormorant Garamond', serif;
 }
 @media (prefers-reduced-motion: reduce) {
   .nav-link {
@@ -4000,7 +4070,7 @@ textarea.form-control-lg {
   }
 }
 .nav-link:hover, .nav-link:focus {
-  color: #0a58ca;
+  color: #f5de14;
 }
 .nav-link.disabled {
   color: #6c757d;
@@ -4596,6 +4666,8 @@ textarea.form-control-lg {
 
 .card-title {
   margin-bottom: 0.5rem;
+  color: black;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 .card-subtitle {
@@ -4603,8 +4675,10 @@ textarea.form-control-lg {
   margin-bottom: 0;
 }
 
-.card-text:last-child {
+.card-text {
   margin-bottom: 0;
+  font-family: 'IBM Plex Serif', serif;
+  padding-bottom: 0.5rem;
 }
 
 .card-link + .card-link {
@@ -4614,7 +4688,8 @@ textarea.form-control-lg {
 .card-header {
   padding: 0.5rem 1rem;
   margin-bottom: 0;
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: white;
+  font-family: 'Bree Serif', serif;
   /* border-bottom: 1px solid rgba(0, 0, 0, 0.125); */
 }
 .card-header:first-child {
@@ -4710,6 +4785,11 @@ textarea.form-control-lg {
 .card-group > .card:not(:first-child) .card-footer {
     border-bottom-left-radius: 0;
   }
+}
+
+.card-meta{
+  font-family: 'Bree Serif', serif;
+  color: purple;
 }
 
 .accordion-button {
@@ -7419,7 +7499,7 @@ textarea.form-control-lg {
 }
 
 .mb-4 {
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 1rem !important;
 }
 
 .mb-5 {
