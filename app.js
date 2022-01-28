@@ -70,6 +70,10 @@ app.get("/credits", function(req, res){
   res.render("credits");
 })
 
+app.get("/sourceCode", function(req, res){
+  res.redirect("https://github.com/Golden-Black/books-and-purple");
+})
+
 app.post("/login", function (req, res) {
   const username = req.body.username;
   const password = req.body.password;
