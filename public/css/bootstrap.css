@@ -117,9 +117,17 @@
   background-image: url("/img/background-image/signup-bg-1.png");
 }
 
+.register-font{
+  font-family: 'EB Garamond', serif;
+}
+
 /* Customization for Login Page*/
 .login-backgd {
   background-image: url("/img/background-image/login-bg.png");
+}
+
+.password-backgd{
+  background-image: url("/img/background-image/password-bg.png");
 }
 
 /* Customization for Register Footer Page*/
@@ -174,6 +182,14 @@
   display: inline-block;
 }
 
+.nav-link-header:hover{
+  border-radius: 12px;
+  background-color: rgb(214, 171, 253);
+  border: 1px rgb(240, 238, 241) solid;
+  color: white;
+  /* padding: 0.5rem; */
+}
+
 /* Home page*/
 .site-newsletter {
   margin-top: 1rem,  !important;
@@ -212,6 +228,13 @@
   border: 2px rgb(12, 1, 168) solid;
   border-radius: 12px;
 }
+
+/* Customization for Icon Positions */
+.icons-padding{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 
 *,
 *::before,
@@ -3406,14 +3429,14 @@ fieldset:disabled .btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: #580092;
+  border-color: #250061;
 }
 
 .btn-primary:hover {
-  color: #fff;
-  background-color: #0b5ed7;
-  border-color: #0a58ca;
+  color: rgb(247, 246, 193);
+  background-color: #8302da;
+  border-color: #8302da;
 }
 
 .btn-check:focus+.btn-primary,

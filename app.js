@@ -23,24 +23,38 @@ const {
 } = require("lodash");
 const res = require("express/lib/response");
 
-var postsArray = [];
+mongoose.connect("mongodb://localhost:27017/purpleDB");
+
+
+let postsArray = [];
 // postsArray.push(homeStartingContent);
+
+// User account 
+let userLikedArray = [];
+let userPosts = [];
 
 // Create schema for mongoDB database collections
 const userSchema = {
   email: String,
-  password: String
+  password: String,
+  userPosts: [{
+    title: String,
+    image: String,
+    review: String,
+    date: String
+  }]
 };
-// create the model object to add to collections
-const User = new mongoose.model("User", userSchema);
 
+// create the a collection: User
+const User = new mongoose.model("User", userSchema);
 
 app.get("/", function (req, res) {
   const day = date.getDate();
 
   res.render("index", {
     title: "Home - Book & Purple",
-    todayEjs: day
+    todayEjs: day,
+    viewsCount: 1000
   });
 })
 
@@ -72,6 +86,10 @@ app.get("/credits", function(req, res){
 
 app.get("/sourceCode", function(req, res){
   res.redirect("https://github.com/Golden-Black/books-and-purple");
+})
+
+app.get("/forgotPassword", function(req, res){
+  res.render("forgotPassword");
 })
 
 app.post("/login", function (req, res) {
