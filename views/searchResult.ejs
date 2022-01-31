@@ -1,0 +1,117 @@
+<%- include("./partials/headers") -%>
+
+<div class="container">
+    <div class="row">
+
+        <div>
+            <h1 class="sr-card-title">Search Result: </h1>
+        </div>
+        <% for(var i=0; i < apiResult.length; i++){ %>
+        <% if(i % 4 === 0) {%>
+        <div class="col-md-3">
+            <!-- Col 1-->
+            <article class="card mb-4">
+
+                <a href="post-image.html" class="searchResult-a">
+                    <img class="card-img" src="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>" alt=" img" />
+                </a>
+                <h4 class="sr-card-title"> <%= apiResult[i].volumeInfo.title %> </h4>
+                <div><a class="author-yellow" href="#">&nbsp;<span class="by">by</span>&nbsp;
+                        <%= apiResult[i].volumeInfo.authors %> &nbsp;</a></div>
+                <div class="sr-card-body">
+                    <p class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
+                        <%= apiResult[i].volumeInfo.description.substring(0, 165) %> <span> &nbsp; ...</span></p>
+                </div>
+                <div class="sr-isbn"><%= apiResult[i].volumeInfo.industryIdentifiers[0].type %>: &nbsp;
+                    <%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %> </div>
+                <button class="btn btn-primary sr-button">Write Review</button>
+            </article>
+            <hr>
+        </div>
+        <% continue;  %>
+        <% } %>
+
+        <!--  Col 2-->
+        <% if(i % 4 === 1) {%>
+        <div class="col-md-3">
+
+            <article class="card mb-4">
+                </header>
+                <a href="post-image.html" class="searchResult-a">
+                    <img class="card-img" src="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>" alt=" img" />
+                </a>
+                <h4 class="sr-card-title"> <%= apiResult[i].volumeInfo.title %> </h4>
+                <div><a class="author-red" href="#">&nbsp;<span class="by">by</span>&nbsp;
+                        <%= apiResult[i].volumeInfo.authors %> &nbsp;</a></div>
+                <div class="sr-card-body">
+                    <p class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
+                        <%= apiResult[i].volumeInfo.description.substring(0, 165) %> <span> &nbsp; ...</span></p>
+                </div>
+                <div class="sr-isbn"><%= apiResult[i].volumeInfo.industryIdentifiers[0].type %>: &nbsp;
+                    <%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %> </div>
+                <!-- <div class="sr-isbn"><%= apiResult[i].volumeInfo.industryIdentifiers[1].type %>: &nbsp; <%= apiResult[i].volumeInfo.industryIdentifiers[1].identifier %> </div> -->
+                <button class="btn btn-primary sr-button">Write Review</button>
+                <hr>
+            </article>
+        </div>
+        <% continue;  %>
+        <% } %>
+
+        <!-- Col 3 -->
+        <% if(i % 4 === 2) {%>
+        <div class="col-md-3">
+
+            <article class="card mb-4">
+
+                <a href="post-image.html" class="searchResult-a">
+                    <img class="card-img" src="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>" alt=" img" />
+                </a>
+                <h4 class="sr-card-title"> <%= apiResult[i].volumeInfo.title %> </h4>
+                <div><a class="author-green" href="#">&nbsp;<span class="by">by</span>&nbsp;
+                        <%= apiResult[i].volumeInfo.authors %> &nbsp;</a></div>
+                <div class="sr-card-body">
+                    <p class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
+                        <%= apiResult[i].volumeInfo.description.substring(0, 165) %> <span> &nbsp; ...</span></p>
+                </div>
+                <div class="sr-isbn"><%= apiResult[i].volumeInfo.industryIdentifiers[0].type %>: &nbsp;
+                    <%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %> </div>
+                <!-- <div class="sr-isbn"><%= apiResult[i].volumeInfo.industryIdentifiers[1].type %>: &nbsp; <%= apiResult[i].volumeInfo.industryIdentifiers[1].identifier %> </div> -->
+
+                <button class="btn btn-primary sr-button">Write Review</button>
+                <hr>
+            </article>
+        </div>
+        <% continue; %>
+        <% } %>
+
+        <!-- Col 4 -->
+        <% if(i % 4 === 3) {%>
+        <div class="col-md-3">
+
+            <article class="card mb-4">
+                <a href="post-image.html" class="searchResult-a">
+                    <img class="card-img" src="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>" alt=" img" />
+                </a>
+                <h4 class="sr-card-title"> <%= apiResult[i].volumeInfo.title %> </h4>
+                <div><a class="author-pink" href="#">&nbsp;<span class="by">by</span>&nbsp;
+                        <%= apiResult[i].volumeInfo.authors %> &nbsp;</a></div>
+                <div class="sr-card-body">
+                    <p class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
+                        <%= apiResult[i].volumeInfo.description.substring(0, 165) %> <span> &nbsp; ...</span></p>
+                </div>
+                <div class="sr-isbn"><%= apiResult[i].volumeInfo.industryIdentifiers[0].type %>: &nbsp;
+                    <%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %> </div>
+                <!-- <div class="sr-isbn"><%= apiResult[i].volumeInfo.industryIdentifiers[1].type %>: &nbsp; <%= apiResult[i].volumeInfo.industryIdentifiers[1].identifier %> </div> -->
+
+                <button class="btn btn-primary sr-button">Write Review</button>
+                <hr>
+            </article>
+        </div>
+        <% continue; %>
+        <% } %>
+        <% } %>
+    </div>
+
+</div>
+
+<%- include("./partials/footers") -%>

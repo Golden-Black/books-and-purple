@@ -1,0 +1,40 @@
+<%- include("./partials/headers") -%>
+<div class="container">
+
+    <p>
+        <h2 class="booksandpurple">Find the Book for Which You Want to Write Something: </h2>
+    </p>
+
+    <ur>
+        <li class="h4 booksandpurple" style="padding-bottom: 0.5rem;">Search by ISBN:
+            <form action="/searchResult" method="POST">
+                <div class="mb-3">
+                    <input type="text" class="form-control rounded-4" name="isbn" placeholder="BookInfo">
+                    <span><button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
+                            type="submit">Search</button></span>
+                </div>
+            </form>
+            <hr class="my-4">
+        </li>
+        <li class="h4 booksandpurple" style="padding-bottom: 0.5rem;">Search by Book Title:
+            <form action="/searchResult" method="POST">
+                <div class="mb-3">
+                    <input type="text" class="form-control rounded-4" name="bookTitle" placeholder="BookInfo">
+                    <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+            <hr class="my-4">
+        </li>
+
+        <li class="h4 booksandpurple" style="padding-bottom: 0.5rem;">Search by Book Author:
+            <form action="/searchResult" method="POST">
+                <div class="mb-3">
+                    <input type="text" class="form-control rounded-4" name="bookAuthor" placeholder="BookInfo">
+                    <button class="w-100 mb-2 btn btn-lg rounded-4 btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+            <hr class="my-4">
+        </li>
+    </ur>
+</div>
+<%- include("./partials/register-footer") -%>

@@ -15,7 +15,11 @@ router.get("/login", controller.renderLoginPage);
 
 router.get("/signup", controller.renderSignupPage);
 
-router.get("/writeReview", controller.renderWriteReviewPage);
+// ----------
+router.get("/searchResult", controller.renderSearchResult);
+// ----------
+
+router.get("/writeReview", controller.renderBookSearch);
 
 router.get("/credits", controller.renderCreditsPage);
 
@@ -28,6 +32,8 @@ router.get("/forgotPassword", controller.renderForgotPasswordPage);
 router.post("/login", controller.postLoginPage);
 
 router.post("/signup", controller.postSignupPage);
+
+router.post("/searchResult", controller.postSearchResult);
 
 router.post("/compose", controller.postComposePage);
 

@@ -1,4 +1,9 @@
+require('dotenv').config();
+const axios = require('axios');
+const { result } = require('lodash');
 const date = require(__dirname + "/date.js");
+
+// const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${bookTitleSearch}&key=${process.env.APIKEY}`;
 
 exports.renderHomePage = (req, res) =>{
     const day = date.getDate();
@@ -33,11 +38,19 @@ exports.renderSignupPage = (req, res) => {
     res.render("signup");
 };
 
-exports.renderWriteReviewPage = (req, res) => {
-    res.render("writeReview", {
-        title: "Write a Review - Books & Purple"
+exports.renderBookSearch = (req, res) => {
+    res.render("searchBook", {
+        title: "Book Search - Books & Purple"
     });
 };
+
+// ------------------------------
+exports.renderSearchResult = (req, res) => {
+    res.render("searchResult", {
+        title: "Result - Books & Purple",
+        apiResult: "result.title"
+    });
+} // --------------------------------
 
 exports.renderCreditsPage = (req, res) => {
     res.render("credits", {
@@ -104,6 +117,45 @@ exports.postSignupPage = (req, res) => {
             }
         }
     })
+};
+
+exports.postSearchResult = (req, res) => {
+
+    const bookTitleSearch = req.body.bookTitle;
+    bookTitleSearch.replace(' ', '+');
+    const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${bookTitleSearch}&key=${process.env.APIKEY}`;
+
+    axios.get(url).then(response => {
+        let result = response.data.items;
+        res.render("searchResult", {
+            title: "Result - Books & Purple",
+            apiResult: result
+        });
+        // let col1, col2, col3, col4 = [];
+        // for(let i = 0; i < result.length; i++){
+        //     if(i % 4 === 0){
+        //         var one = result[i].volumeInfo;
+        //         col1.push(one);
+        //     }
+        //     if(i % 4 === 1){
+        //         var two = result[i].volumeInfo;
+        //         col2.push(two);
+        //     }
+        //     if(i % 4 === 2){
+        //         var three = result[i].volumeInfo;
+        //         col3.push(three);
+        //     }
+        //     if(i % 4 === 3){
+        //         var four = result[i].volumeInfo;
+        //         col4.push(four);
+        //     }
+        // }
+        // console.log(result);
+        // console.log(result[0].volumeInfo.imageLinks.thumbnail);
+    }).catch(err => {
+        console.log(err);
+    });
+
 };
 
 exports.postComposePage = (req, res) => {

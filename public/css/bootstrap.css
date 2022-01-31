@@ -250,6 +250,78 @@
   padding-bottom: 2rem;
 }
 
+/* Customization for SearchResult Page */
+.searchResult-a{
+  padding-top: 1.2rem;
+}
+
+.sr-card-title{
+  padding-top: 1rem;
+  margin-bottom: 0.2rem;
+  color: black;
+  font-family: 'Crete Round', serif;
+}
+
+.sr-card-body{
+  flex: 1 1 auto;
+  padding-top: 0.6rem;
+}
+
+.author-yellow{
+  color: black; 
+  background-color: rgb(238, 206, 102); 
+  border: 2px rgb(238, 206, 102) solid; 
+  border-radius: 12px;
+  font-family: 'Crete Round', serif;
+  margin-bottom: 1rem;
+}
+
+.author-red{
+  color: white; 
+  background-color: red; 
+  border: 2px red solid; 
+  border-radius: 12px;
+  font-family: 'Crete Round', serif;
+  margin-bottom: 1rem;
+}
+
+.author-green{
+  color: white; 
+  background-color: green; 
+  border: 2px green solid; 
+  border-radius: 12px;
+  font-family: 'Crete Round', serif;
+  margin-bottom: 1rem;
+}
+
+.author-pink{
+  color: black; 
+  background-color: pink; 
+  border: 2px pink solid; 
+  border-radius: 12px;
+  font-family: 'Crete Round', serif;
+  margin-bottom: 1rem;
+}
+
+.sr-description {
+  color: white; 
+  background-color: rgb(51, 35, 196); 
+  border: 2px rgb(51, 35, 196) solid; 
+  border-radius: 12px;
+  font-family: 'Crete Round', serif;
+  margin-bottom: 1rem;
+}
+
+.sr-isbn{
+  color: black;
+  font-family: 'Crete Round', serif;
+}
+
+.sr-button{
+  margin-top: 0.5rem;
+  font-family: 'Crete Round', serif;
+  border-radius: 24px !important;
+}
 
 *,
 *::before,
