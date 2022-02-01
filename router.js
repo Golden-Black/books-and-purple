@@ -19,7 +19,7 @@ router.get("/signup", controller.renderSignupPage);
 router.get("/searchResult", controller.renderSearchResult);
 // ----------
 
-router.get("/writeReview", controller.renderBookSearch);
+router.get("/compose", controller.renderComposePage);
 
 router.get("/credits", controller.renderCreditsPage);
 
@@ -36,5 +36,7 @@ router.post("/signup", controller.postSignupPage);
 router.post("/searchResult", controller.postSearchResult);
 
 router.post("/compose", controller.postComposePage);
+
+router.post("/success", controller.postSuccessPage);
 
 module.exports = router;

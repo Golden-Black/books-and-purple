@@ -5,12 +5,15 @@
     <div class="container">
 
         <div class="row">
+            
+            <% for(var item = 0; item < postings.length; item++){ %>
             <!-- This is the left col -->
+            <% if(item % 2 === 0){ %>
             <div class="col-md-4-s">
                 <article class="card mb-4">
                     <header class="card-header">
                         <a style="color: black; background-color: rgb(238, 206, 102); border: 2px rgb(238, 206, 102) solid; 
-                        border-radius: 12px;" href="#">&nbsp; DUNE <span class="by">by</span> Frank Herbert &nbsp;</a>
+                        border-radius: 12px;" href="#">&nbsp; <%= postings[item].title %> <span class="by">by</span> <%= postings[item].authors %> &nbsp;</a>
                     </header>
                     <a href="post-image.html">
                         <img class="card-img"
@@ -20,13 +23,12 @@
                     <div class="card-body">
                         <div>
                             <a href="post-image.html">
-                                <h4 class="card-title">It's everything you've heard it is and more.</h4>
+                                <h4 class="card-title"> <%= postings[item].reviewTitle %> </h4>
                             </a>
                         </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi... Read More </p>
+                        <p class="card-text"> <%= postings[item].review.substring(0, 165) %> ... Read More </p>
                         <div class="card-meta">
-                            <p> <%= todayEjs %> </p>
+                            <p> <%= postings[item].date %> </p>
                         </div>
                         <div class="container">
                             <div class="row">
@@ -44,100 +46,17 @@
                     </div>
                 </article>
                 <hr>
-
-                <article class="card mb-4">
-                    <header class="card-header">
-                        <a style="color: white; background-color: green; border: 2px green solid; border-radius: 12px;"
-                            href="#">&nbsp; Shoe Dog <span class="by">by</span> Phil Knight &nbsp;</a>
-                    </header>
-                    <a href="post-image.html">
-                        <img class="card-img"
-                            src="https://media.gatesnotes.com/-/media/Images/Books/Shoe-Dog/shoe-dog_2016_800px.ashx"
-                            alt="" />
-                    </a>
-                    <div class="card-body">
-                        <div>
-                            <a href="post-image.html">
-                                <h4 class="card-title">Knight is the most interesting person I never knew I wanted to
-                                    meet...</h4>
-                            </a>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
-                            Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum
-                            imperdiet.
-                            Duis sagittis ipsum. Praesent mauris... Read More </p>
-                        <div class="card-meta">
-                            <p> <%= todayEjs %> </p>
-                        </div>
-
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                    <img src="/img/icons/eye.png" alt="Views Count" height="24"> <%= viewsCount %>
-                                </div>
-                                <div class="col order-1">
-                                    <img src="/img/icons/thumbs-up.png" alt="Like" height="24"> 123
-                                </div>
-                                <div class="col order-2">
-                                    <img src="/img/icons/thumbs-down.png" alt="Dislike" height="24"> 25
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article><!-- /.card -->
-                <hr>
-
-                <article class="card mb-4">
-                    <header class="card-header">
-                        <div>
-                            <a style="color: white; background-color: orange; border: 2px orange solid; border-radius: 12px;"
-                                href="#">&nbsp; Principles <span class="by">by</span> Ray Dalio &nbsp;</a>
-                        </div>
-                    </header>
-                    <a href="post-image.html">
-                        <img class="card-img"
-                            src="https://static01.nyt.com/images/2017/09/10/business/10BRIDGEWATER5/10BRIDGEWATER5-videoSixteenByNineJumbo1600.jpg"
-                            alt="" />
-                    </a>
-                    <div class="card-body">
-                        <div><a href="post-image.html">
-                                <h4 class="card-title">Great book but create your own principles</h4>
-                            </a></div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-                            odio. Praesent libero.
-                            Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.
-                            Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta.
-                            Mauris massa. Vestibulum lacinia arcu eget nulla... Read More </p>
-                        <div class="card-meta">
-                            <p> <%= todayEjs %> </p>
-                        </div>
-
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                    <img src="/img/icons/eye.png" alt="Views Count" height="24"> <%= viewsCount %>
-                                </div>
-                                <div class="col order-1">
-                                    <img src="/img/icons/thumbs-up.png" alt="Like" height="24"> 123
-                                </div>
-                                <div class="col order-2">
-                                    <img src="/img/icons/thumbs-down.png" alt="Dislike" height="24"> 25
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article><!-- /.card -->
-                <hr>
             </div>
-
+            <% } %>
 
             <!-- This is the middle col -->
+            <% if(item % 2 === 1) { %>
             <div class="col-md-4-s">
                 <article class="card mb-4">
                     <header class="card-header">
-                        <a style="color: white; background-color: red; border: 2px red solid; border-radius: 12px;"
-                            href="#">&nbsp; The Hard Thing about Hard Things <span class="by">by</span>
-                            Ben Horowitz &nbsp; </a>
+                        <a style="color: white; background-color: green; border: 2px green solid; border-radius: 12px;"
+                            href="#">&nbsp; <%= postings[item].Title %> <span class="by">by</span>
+                            <%= postings[item].authors %> &nbsp; </a>
                     </header>
                     <a href="post-image.html">
                         <img class="card-img" src="http://frogcapital.com/wp-content/uploads/IMG_8334-1024x924.jpg"
@@ -146,17 +65,14 @@
                     <div class="card-body">
                         <div>
                             <a href="post-image.html">
-                                <h4 class="card-title">Solid advice for start-ups and other leaders</h4>
+                                <h4 class="card-title"> <%= postings[item].reviewTitle %> </h4>
                             </a>
                         </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
-                            Praesent libero.
-                            Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.
-                            Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta... Read More
+                        <p class="card-text"> <%= postings[item].review.substring(0, 165) %> ... Read More
                         </p>
 
                         <div class="card-meta">
-                            <p> <%= todayEjs %> </p>
+                            <p> <%= postings[item].date %> </p>
                         </div>
                         <div class="container">
                             <div class="row">
@@ -172,94 +88,14 @@
                             </div>
                         </div>
                     </div>
-                </article><!-- /.card -->
-                <hr>
-
-                <article class="card mb-4">
-                    <header class="card-header">
-                        <a style="color: black; background-color: pink; border: 2px pink solid; border-radius: 12px;"
-                            href="#">&nbsp; Atomic Habits <span class="by">by</span> James Clear &nbsp;</a>
-                    </header>
-                    <a href="/atomic-habits">
-                        <img class="card-img"
-                            src="https://www.tonal.com/wp-content/uploads/2021/03/Blog_BookClub_Atomic-Habits_1200x800.jpg?resize=1300%2C867"
-                            alt="" />
-                    </a>
-                    <div class="card-body">
-                        <div>
-                            <a href="/atomic-habits">
-                                <h4 class="card-title">Beware!! This Book can change your Life :)</h4>
-                            </a>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
-                            Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum
-                            imperdiet.
-                            Duis sagittis ipsum. Praesent mauris... Read More </p>
-                        <div class="card-meta">
-                            <p> <%= todayEjs %> </p>
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                    <img src="/img/icons/eye.png" alt="Views Count" height="24"> <%= viewsCount %>
-                                </div>
-                                <div class="col order-1">
-                                    <img src="/img/icons/thumbs-up.png" alt="Like" height="24"> 123
-                                </div>
-                                <div class="col order-2">
-                                    <img src="/img/icons/thumbs-down.png" alt="Dislike" height="24"> 25
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article><!-- /.card -->
-                <hr>
-
-                <article class="card mb-4">
-                    <header class="card-header">
-                        <a style="color: white; background-color: rgb(51, 213, 224); border: 2px rgb(51, 213, 224) solid; border-radius: 12px;"
-                            href="#">&nbsp; Greenlights <span class="by">by</span> Matthew
-                            McConaughey &nbsp;</a>
-                    </header>
-                    <a href="post-image.html">
-                        <img class="card-img" src="https://images-na.ssl-images-amazon.com/images/I/61-Pt+1b+xL.jpg"
-                            alt="" />
-                    </a>
-                    <div class="card-body">
-                        <div>
-                            <a href="post-image.html">
-                                <h4 class="card-title">Man what a ride! </h4>
-                            </a>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio.
-                            Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum
-                            imperdiet.
-                            Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris
-                            massa... Read More
-                        </p>
-                        <div class="card-meta">
-                            <p> <%= todayEjs %> </p>
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                    <img src="/img/icons/eye.png" alt="Views Count" height="24"> <%= viewsCount %>
-                                </div>
-                                <div class="col order-1">
-                                    <img src="/img/icons/thumbs-up.png" alt="Like" height="24"> 123
-                                </div>
-                                <div class="col order-2">
-                                    <img src="/img/icons/thumbs-down.png" alt="Dislike" height="24"> 25
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article><!-- /.card -->
+                </article>
                 <hr>
             </div>
-
+            <% } %>
+            
 
             <!-- This is the right col -->
+            <% if(item === 1) { %>
             <div class="col-md-4-lite">
                 <header class="card-header">
                     <h4 class="card">Popular Categories </h4>
@@ -321,8 +157,11 @@
                 <hr>
 
             </div>
+            <% } %>
+            <% } %>
         </div>
     </div>
+
 
 </main>
 

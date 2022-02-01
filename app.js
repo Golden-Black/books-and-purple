@@ -5,20 +5,37 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const router = require("./router");
 const app = express();
+const date = require(__dirname + "/date.js");
+const mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+const User = require('./models/User');
 
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: false
 }));
 app.use(express.static("public"));
 
-// lodash
-// Load the full build.
-var _ = require('lodash');
-const {
-  forEach
-} = require("lodash");
+app.use(session({
+  secret: process.env.SESSION_SECRET || "Salvation lies within.",
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+mongoose.connect("mongodb://localhost:27017/purpleDB", {useNewUrlParser: true});
+
+// // lodash
+// // Load the full build.
+// var _ = require('lodash');
+// const {
+//   forEach
+// } = require("lodash");
 
 app.use("/", router);
 

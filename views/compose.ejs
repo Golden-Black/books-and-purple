@@ -1,0 +1,54 @@
+<%- include("./partials/headers") -%>
+
+<div class="container">
+    <h2 class="compose-entries">Share Your Thoughts on a Book!</h2>
+
+    <form action="/success" method="POST">
+
+        <div class="form-group">
+            <div>
+                <label class="entries">&nbsp; Date &nbsp; </label>
+            </div>
+            <input type="text" name="date" class="form-control" required>
+
+            <div>
+                <label class="entries">&nbsp; Book Name &nbsp; </label>
+            </div>
+            <input type="text" name="bookTitle" class="form-control" required>
+            
+            <div>
+                <label class="entries">&nbsp; Author &nbsp;</label>
+            </div>
+            <input type="text" name="bookAuthor" class="form-control" required>
+            
+            <div>
+                <label class="entries">&nbsp; ISBN Number &nbsp;</label>
+            </div>
+            <input type="text" name="ISBN" class="form-control">
+            
+            <div>
+                <label class="entries">&nbsp; Image &nbsp;</label>
+            </div>
+            <input type="image" name="imageLink" class="form-control">
+
+            <div>
+                <label class="entries">&nbsp; Category &nbsp;</label>
+            </div>
+            <input type="image" name="category" class="form-control">
+
+            <div>
+                <label class="entries">&nbsp; Review Title &nbsp; </label>
+            </div>
+            <input type="text" name="reviewTitle" class="form-control" required>
+            
+            <label class="entries">What's something you want to talk about this book?</label>
+            <textarea name="bookReview" rows="5" class="form-control" required></textarea>
+        </div>
+
+        <div class="publish">
+            <button class="btn btn-primary" type="submit" name="theReview">Cancel</button>
+            <button class="btn btn-primary" type="submit" name="theReview">Submit</button>
+        </div>
+    </form>
+</div>
+<%- include("./partials/footers") -%>

@@ -235,12 +235,22 @@
   padding-right: 0 !important;
 }
 
-/* Customization for WriteReview Page*/
+/* Customization for Compose Page*/
+.compose-entries{
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-family: 'EB Garamond', serif;
+}
+
 .entries{
   margin-top: 1rem;
   margin-bottom: 0.5rem;
   font-family: 'EB Garamond', serif;
   font-size: large;
+  background-color: rgb(136, 33, 136);
+  border: 2px purple solid;
+  border-radius: 12px;
+  color: white;
 }
 
 .publish{

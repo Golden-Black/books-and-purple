@@ -1,17 +1,50 @@
 require('dotenv').config();
 const axios = require('axios');
-const { result } = require('lodash');
+const User = require('../models/User');
+const SubmittedPost = require('../models/Display');
 const date = require(__dirname + "/date.js");
+const mongoose = require("mongoose");
+const session = require('express-session');
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
+const {
+    result
+} = require('lodash');
+const {
+    post
+} = require('../router');
+const {
+    json
+} = require('express/lib/response');
 
-// const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${bookTitleSearch}&key=${process.env.APIKEY}`;
+// var postings = mongoose.model('SubmittedPost');
+// console.log(submittedPosts);
 
-exports.renderHomePage = (req, res) =>{
-    const day = date.getDate();
+exports.renderHomePage = (req, res) => {
 
-    res.render("index", {
-        title: "Home - Book & Purple",
-        todayEjs: day,
-        viewsCount: 1000
+    SubmittedPost.find(function (err, books) {
+        if (err) {
+            console.log(err);
+        } else {
+            if (req.isAuthenticated()) {
+                console.log(req.body);
+                res.render("index", {
+                    title: "Home - Book & Purple",
+                    postings: books,
+                    viewsCount: 1000,
+                    login: "Logout",
+                    signup: req.user.username
+                })
+            } else {
+                res.render("index", {
+                    title: "Home - Book & Purple",
+                    postings: books,
+                    viewsCount: 1000,
+                    login: "Login",
+                    signup: "Sign Up"
+                });
+            }
+        }
     });
 };
 
@@ -28,7 +61,7 @@ exports.renderContactPage = (req, res) => {
     });
 };
 
-exports.renderLoginPage = (req, res) =>{
+exports.renderLoginPage = (req, res) => {
     res.render("login", {
         title: "Login - Book & Purple"
     });
@@ -44,6 +77,11 @@ exports.renderBookSearch = (req, res) => {
     });
 };
 
+exports.renderComposePage = (req, res) => {
+    res.render("compose", {
+        title: "Compose - Books & Purple"
+    });
+}
 // ------------------------------
 exports.renderSearchResult = (req, res) => {
     res.render("searchResult", {
@@ -67,56 +105,67 @@ exports.renderForgotPasswordPage = (req, res) => {
 };
 
 exports.postLoginPage = (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-
-    User.findOne({
-        email: username
-    }, function (err, userFound) {
-        if (err) {
-            console.log(err);
-            alert("Sorry, an error has occurd! Please try again later.");
-        } else {
-            if (userFound) {
-                if (userFound.password === password) {
-                    res.render("/");
-                } else {
-                    alert("Sorry, incorrect password! Please try again.");
-                }
-            } else {
-                console.log("User Not Found.");
-                alert("User Not Found.");
-            }
-        }
-    })
 };
 
 exports.postSignupPage = (req, res) => {
-    const newUser = new User({
-        email: req.body.username,
-        password: req.body.password
-    })
 
-    User.findOne({
-        email: username
-    }, function (err, userFound) {
-        if (err) {
-            console.log(err);
-            alert("Sorry, an error has occurd! Please try again later.");
-        } else {
-            if (userFound) {
-                alert("Email registered. Please login.");
+    User.register({
+            username: req.body.username
+        },
+        req.body.password,
+        function (err, user) {
+            if (err) {
+                console.log(err);
+                res.redirect("/signup");
             } else {
-                newUser.save(function (err) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        res.render("/");
-                    }
+                passport.authenticate("local")(req, res, function () {
+                    SubmittedPost.find(function (err, books) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                                console.log(req.body.username);
+                                res.render("index", {
+                                    title: "Home - Book & Purple",
+                                    postings: books,
+                                    viewsCount: 1000,
+                                    login: "Logout",
+                                    signup: req.body.username
+                                }
+                                );
+                            }
+                        }
+                    );
                 })
             }
-        }
-    })
+        })
+
+
+
+    // const newUser = new User({
+    //     email: req.body.username,
+    //     password: req.body.password
+    // })
+
+    // User.findOne({
+    //     email: username
+    // }, function (err, userFound) {
+    //     if (err) {
+    //         console.log(err);
+    //         alert("Sorry, an error has occurd! Please try again later.");
+    //     } else {
+    //         if (userFound) {
+    //             alert("Email registered. Please login.");
+    //         } else {
+    //             newUser.save(function (err) {
+    //                 if (err) {
+    //                     console.log(err);
+    //                 } else {
+    //                     res.render("/");
+    //                 }
+    //             })
+    //         }
+    //     }
+    // })
 };
 
 exports.postSearchResult = (req, res) => {
@@ -170,3 +219,46 @@ exports.postComposePage = (req, res) => {
     res.redirect("/");
 };
 
+
+exports.postSuccessPage = async (req, res) => {
+    const today = require(__dirname + "/date.js");
+    const day = today.getDate();
+
+    const newPost = new Display({
+        title: req.body.bookTitle,
+        authors: req.body.bookAuthor,
+        imageLink: req.body.imageLink,
+        isbn: req.body.ISBN,
+        reviewTitle: req.body.bookReview,
+        review: req.body.bookReview,
+        date: day,
+        category: req.body.category
+    });
+
+
+    const userPost = new userSchema.userPosts({
+        title: req.body.bookTitle,
+        authors: req.body.bookAuthor,
+        imageLink: req.body.imageLink,
+        isbn: req.body.ISBN,
+        reviewTitle: req.body.bookReview,
+        review: req.body.bookReview,
+        date: day,
+        category: req.body.category
+    });
+
+    try {
+        User.findOne({
+            username: req.body.username
+        }, function (err, foundUser) {
+            foundUser.userPosts.push(userPost);
+            foundUser.save();
+        })
+        articles = await newPost.save();
+        res.redirect("success");
+    } catch (err) {
+        console.log(err);
+        res.redirect("/");
+    }
+
+}
