@@ -15,9 +15,11 @@ router.get("/login", controller.renderLoginPage);
 
 router.get("/signup", controller.renderSignupPage);
 
-// ----------
+router.get("/account", controller.renderAccountPage);
+
+router.get("/searchBook", controller.renderSearchBook);
+
 router.get("/searchResult", controller.renderSearchResult);
-// ----------
 
 router.get("/compose", controller.renderComposePage);
 

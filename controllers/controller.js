@@ -61,33 +61,79 @@ exports.renderContactPage = (req, res) => {
     });
 };
 
+exports.renderAccountPage = (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render("account", {
+            title: "Your account - Books & Purple",
+            login: "Logout",
+            signup: req.user.username
+        });
+    } else {
+        res.redirect("/login");
+    }
+}
+
 exports.renderLoginPage = (req, res) => {
-    res.render("login", {
-        title: "Login - Book & Purple"
-    });
+
+    if (req.isAuthenticated()) {
+        // Logout if authenticated
+        req.logout();
+        res.redirect("/login");
+    } else {
+        res.render("login", {
+            title: "Login - Book & Purple"
+        });
+    }
+
 };
 
 exports.renderSignupPage = (req, res) => {
-    res.render("signup");
+    if (req.isAuthenticated()) {
+        res.render("account", {
+            title: "Your account - Books & Purple",
+            login: "Logout",
+            signup: req.user.username
+        });
+    } else {
+        res.render("signup");
+    }
 };
 
-exports.renderBookSearch = (req, res) => {
-    res.render("searchBook", {
-        title: "Book Search - Books & Purple"
-    });
+exports.renderSearchBook = (req, res) => {
+    if (req.isAuthenticated()) {
+        res.render("searchBook", {
+            title: "Book Search - Books & Purple",
+            login: "Logout",
+            signup: req.user.username
+        });
+    } else {
+        res.redirect('/login');
+    }
 };
 
 exports.renderComposePage = (req, res) => {
-    res.render("compose", {
-        title: "Compose - Books & Purple"
-    });
+    if (req.isAuthenticated()) {
+        res.render("compose", {
+            title: "Compose - Books & Purple",
+            login: "Logout",
+            signup: req.user.username 
+        }); 
+    }else{
+        res.redirect("/login");
+    }
 }
 // ------------------------------
 exports.renderSearchResult = (req, res) => {
-    res.render("searchResult", {
-        title: "Result - Books & Purple",
-        apiResult: "result.title"
-    });
+    if (req.isAuthenticated()) {
+        res.render("searchResult", {
+            title: "Result - Books & Purple",
+            apiResult: "result.title",
+            login: "Logout",
+            signup: req.user.username
+        });
+    } else {
+        res.redirect('/login');
+    }
 } // --------------------------------
 
 exports.renderCreditsPage = (req, res) => {
@@ -105,12 +151,26 @@ exports.renderForgotPasswordPage = (req, res) => {
 };
 
 exports.postLoginPage = (req, res) => {
+    const user = new User({
+        username: req.body.username,
+        password: req.body.password
+    });
+
+    req.login(user, function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            passport.authenticate("local")(req, res, function () {
+                res.redirect("/");
+            })
+        }
+    })
 };
 
 exports.postSignupPage = (req, res) => {
-
     User.register({
-            username: req.body.username
+            username: req.body.username,
+            email: req.body.email
         },
         req.body.password,
         function (err, user) {
@@ -123,18 +183,16 @@ exports.postSignupPage = (req, res) => {
                         if (err) {
                             console.log(err);
                         } else {
-                                console.log(req.body.username);
-                                res.render("index", {
-                                    title: "Home - Book & Purple",
-                                    postings: books,
-                                    viewsCount: 1000,
-                                    login: "Logout",
-                                    signup: req.body.username
-                                }
-                                );
-                            }
+                            console.log(req.body.username);
+                            res.render("index", {
+                                title: "Home - Book & Purple",
+                                postings: books,
+                                viewsCount: 1000,
+                                login: "Logout",
+                                signup: req.body.username
+                            });
                         }
-                    );
+                    });
                 })
             }
         })
@@ -170,40 +228,47 @@ exports.postSignupPage = (req, res) => {
 
 exports.postSearchResult = (req, res) => {
 
-    const bookTitleSearch = req.body.bookTitle;
-    bookTitleSearch.replace(' ', '+');
-    const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${bookTitleSearch}&key=${process.env.APIKEY}`;
+    if (req.isAuthenticated()) {
 
-    axios.get(url).then(response => {
-        let result = response.data.items;
-        res.render("searchResult", {
-            title: "Result - Books & Purple",
-            apiResult: result
+        const bookTitleSearch = req.body.bookTitle;
+        bookTitleSearch.replace(' ', '+');
+        const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${bookTitleSearch}&key=${process.env.APIKEY}`;
+
+        axios.get(url).then(response => {
+            let result = response.data.items;
+            res.render("searchResult", {
+                title: "Result - Books & Purple",
+                apiResult: result,
+                login: "Logout",
+                signup: req.user.username
+            });
+            // let col1, col2, col3, col4 = [];
+            // for(let i = 0; i < result.length; i++){
+            //     if(i % 4 === 0){
+            //         var one = result[i].volumeInfo;
+            //         col1.push(one);
+            //     }
+            //     if(i % 4 === 1){
+            //         var two = result[i].volumeInfo;
+            //         col2.push(two);
+            //     }
+            //     if(i % 4 === 2){
+            //         var three = result[i].volumeInfo;
+            //         col3.push(three);
+            //     }
+            //     if(i % 4 === 3){
+            //         var four = result[i].volumeInfo;
+            //         col4.push(four);
+            //     }
+            // }
+            // console.log(result);
+            // console.log(result[0].volumeInfo.imageLinks.thumbnail);
+        }).catch(err => {
+            console.log(err);
         });
-        // let col1, col2, col3, col4 = [];
-        // for(let i = 0; i < result.length; i++){
-        //     if(i % 4 === 0){
-        //         var one = result[i].volumeInfo;
-        //         col1.push(one);
-        //     }
-        //     if(i % 4 === 1){
-        //         var two = result[i].volumeInfo;
-        //         col2.push(two);
-        //     }
-        //     if(i % 4 === 2){
-        //         var three = result[i].volumeInfo;
-        //         col3.push(three);
-        //     }
-        //     if(i % 4 === 3){
-        //         var four = result[i].volumeInfo;
-        //         col4.push(four);
-        //     }
-        // }
-        // console.log(result);
-        // console.log(result[0].volumeInfo.imageLinks.thumbnail);
-    }).catch(err => {
-        console.log(err);
-    });
+    } else {
+        res.redirect("/login");
+    }
 
 };
 
@@ -223,42 +288,47 @@ exports.postComposePage = (req, res) => {
 exports.postSuccessPage = async (req, res) => {
     const today = require(__dirname + "/date.js");
     const day = today.getDate();
-
-    const newPost = new Display({
-        title: req.body.bookTitle,
-        authors: req.body.bookAuthor,
-        imageLink: req.body.imageLink,
-        isbn: req.body.ISBN,
-        reviewTitle: req.body.bookReview,
-        review: req.body.bookReview,
-        date: day,
-        category: req.body.category
-    });
+    const reviewTitle = req.body.reviewTitle;
+    const review = req.body.review;
+    const category = req.body.category;
 
 
-    const userPost = new userSchema.userPosts({
-        title: req.body.bookTitle,
-        authors: req.body.bookAuthor,
-        imageLink: req.body.imageLink,
-        isbn: req.body.ISBN,
-        reviewTitle: req.body.bookReview,
-        review: req.body.bookReview,
-        date: day,
-        category: req.body.category
-    });
 
-    try {
-        User.findOne({
-            username: req.body.username
-        }, function (err, foundUser) {
-            foundUser.userPosts.push(userPost);
-            foundUser.save();
-        })
-        articles = await newPost.save();
-        res.redirect("success");
-    } catch (err) {
-        console.log(err);
-        res.redirect("/");
-    }
+    // const newPost = new Display({
+    //     title: req.body.bookTitle,
+    //     authors: req.body.bookAuthor,
+    //     imageLink: req.body.imageLink,
+    //     isbn: req.body.ISBN,
+    //     reviewTitle: req.body.bookReview,
+    //     review: req.body.bookReview,
+    //     date: day,
+    //     category: req.body.category
+    // });
+
+
+    // const userPost = new userSchema.userPosts({
+    //     title: req.body.bookTitle,
+    //     authors: req.body.bookAuthor,
+    //     imageLink: req.body.imageLink,
+    //     isbn: req.body.ISBN,
+    //     reviewTitle: req.body.bookReview,
+    //     review: req.body.bookReview,
+    //     date: day,
+    //     category: req.body.category
+    // });
+
+    // try {
+    //     User.findOne({
+    //         username: req.body.username
+    //     }, function (err, foundUser) {
+    //         foundUser.userPosts.push(userPost);
+    //         foundUser.save();
+    //     })
+    //     articles = await newPost.save();
+    //     res.redirect("success");
+    // } catch (err) {
+    //     console.log(err);
+    //     res.redirect("/");
+    // }
 
 }
