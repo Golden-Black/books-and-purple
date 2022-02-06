@@ -78,7 +78,7 @@ exports.renderLoginPage = (req, res) => {
     if (req.isAuthenticated()) {
         // Logout if authenticated
         req.logout();
-        res.redirect("/login");
+        res.redirect("/");
     } else {
         res.render("login", {
             title: "Login - Book & Purple"

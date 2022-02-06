@@ -35,7 +35,7 @@ const item0 = new SubmittedPost({
   category: "Fiction"
 });
 
-item0.save();
+
 
 const item1 = new SubmittedPost({
   title: "Shoe Dog",
@@ -48,7 +48,6 @@ const item1 = new SubmittedPost({
   category: "Business"
 });
 
-item1.save();
 
 const item2 = new SubmittedPost({
   title: "The Hard Thing about Hard Things",

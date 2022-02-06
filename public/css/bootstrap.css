@@ -202,6 +202,21 @@
   border-radius: 25%; */
 }
 
+/* Customization for Account Page */
+.account-font{
+  text-align: center;
+  padding-top: 1rem;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.onDisplay{
+  padding: 0.5rem;
+  background-color: purple;
+  color: white;
+  border: 1px purple solid;
+  border-radius: 25px;
+}
+
 .load-more {
   text-decoration: underline;
   text-align: center;

@@ -5,20 +5,18 @@
     <div class="container">
 
         <div class="row">
-            
-            <% for(var item = 0; item < postings.length; item++){ %>
+            <% for(var item = 0; item < 2; item++){ %>
             <!-- This is the left col -->
             <% if(item % 2 === 0){ %>
-            <div class="col-md-4-s">
+            <div class="col-md-4-s order-lg-first order-sm-1">
                 <article class="card mb-4">
                     <header class="card-header">
                         <a style="color: black; background-color: rgb(238, 206, 102); border: 2px rgb(238, 206, 102) solid; 
-                        border-radius: 12px;" href="#">&nbsp; <%= postings[item].title %> <span class="by">by</span> <%= postings[item].authors %> &nbsp;</a>
+                        border-radius: 12px;" href="#">&nbsp; <%= postings[item].title %> <span class="by">by</span>
+                            <%= postings[item].authors %> &nbsp;</a>
                     </header>
                     <a href="post-image.html">
-                        <img class="card-img"
-                            src="https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F70e181a5-bcfd-44dc-adee-e82f5359195d_4032x3024.jpeg"
-                            alt="" />
+                        <img class="card-img" src="<%= postings[item].imageLink %>" alt="" />
                     </a>
                     <div class="card-body">
                         <div>
@@ -51,16 +49,15 @@
 
             <!-- This is the middle col -->
             <% if(item % 2 === 1) { %>
-            <div class="col-md-4-s">
+            <div class="col-md-4-s order-lg-2 order-sm-2">
                 <article class="card mb-4">
                     <header class="card-header">
                         <a style="color: white; background-color: green; border: 2px green solid; border-radius: 12px;"
-                            href="#">&nbsp; <%= postings[item].Title %> <span class="by">by</span>
+                            href="#">&nbsp; <%= postings[item].title %> <span class="by">by</span>
                             <%= postings[item].authors %> &nbsp; </a>
                     </header>
                     <a href="post-image.html">
-                        <img class="card-img" src="http://frogcapital.com/wp-content/uploads/IMG_8334-1024x924.jpg"
-                            alt="" />
+                        <img class="card-img" src="<%= postings[item].imageLink %>" alt="" />
                     </a>
                     <div class="card-body">
                         <div>
@@ -92,11 +89,9 @@
                 <hr>
             </div>
             <% } %>
-            
-
             <!-- This is the right col -->
             <% if(item === 1) { %>
-            <div class="col-md-4-lite">
+            <div class="col-md-4-lite order-lg-3 order-sm-0">
                 <header class="card-header">
                     <h4 class="card">Popular Categories </h4>
                 </header>
@@ -158,7 +153,94 @@
 
             </div>
             <% } %>
+        <% } %>
+
+        <% for(var i = 2; i < postings.length; i++) {%>
+            <% if(i % 2 === 0){ %>
+            <div class="col-md-4-s order-lg-4">
+                <article class="card mb-4">
+                    <header class="card-header">
+                        <a style="color: black; background-color: rgb(238, 206, 102); border: 2px rgb(238, 206, 102) solid; 
+                                border-radius: 12px;" href="#">&nbsp; <%= postings[i].title %> <span
+                                class="by">by</span> <%= postings[i].authors %> &nbsp;</a>
+                    </header>
+                    <a href="post-image.html">
+                        <img class="card-img" src="<%= postings[i].imageLink %>" alt="" />
+                    </a>
+                    <div class="card-body">
+                        <div>
+                            <a href="post-image.html">
+                                <h4 class="card-title"> <%= postings[i].reviewTitle %> </h4>
+                            </a>
+                        </div>
+                        <p class="card-text"> <%= postings[i].review.substring(0, 165) %> ... Read More </p>
+                        <div class="card-meta">
+                            <p> <%= postings[i].date %> </p>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <img src="/img/icons/eye.png" alt="Views Count" height="24"> <%= viewsCount %>
+                                </div>
+                                <div class="col order-1">
+                                    <img src="/img/icons/thumbs-up.png" alt="Like" height="24"> 123
+                                </div>
+                                <div class="col order-2">
+                                    <img src="/img/icons/thumbs-down.png" alt="Dislike" height="24"> 25
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <hr>
+            </div>
             <% } %>
+            <% } %>
+
+        <% for(var x = 2; x < postings.length; x++) {%>
+            <% if(x % 2 === 1) { %>
+            <div class="col-md-4-s order-lg-5">
+                <article class="card mb-4">
+                    <header class="card-header">
+                        <a style="color: white; background-color: green; border: 2px green solid; border-radius: 12px;"
+                            href="#">&nbsp; <%= postings[x].title %> <span class="by">by</span>
+                            <%= postings[x].authors %> &nbsp; </a>
+                    </header>
+                    <a href="post-image.html">
+                        <img class="card-img" src="<%= postings[x].imageLink %>" alt="" />
+                    </a>
+                    <div class="card-body">
+                        <div>
+                            <a href="post-image.html">
+                                <h4 class="card-title"> <%= postings[x].reviewTitle %> </h4>
+                            </a>
+                        </div>
+                        <p class="card-text"> <%= postings[x].review.substring(0, 165) %> ... Read More
+                        </p>
+
+                        <div class="card-meta">
+                            <p> <%= postings[x].date %> </p>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <img src="/img/icons/eye.png" alt="Views Count" height="24"> <%= viewsCount %>
+                                </div>
+                                <div class="col order-1">
+                                    <img src="/img/icons/thumbs-up.png" alt="Like" height="24"> 123
+                                </div>
+                                <div class="col order-2">
+                                    <img src="/img/icons/thumbs-down.png" alt="Dislike" height="24"> 25
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <hr>
+            </div>
+            <% } %>
+        <% } %>
+
         </div>
     </div>
 
