@@ -1,5 +1,10 @@
-# books-and-purple
+# Books-and-Purple
  
+<h3> Run the App locally: </h3><br>
+All needed dependencies are included in the package.json file. Clone the projecet to your local machine. Then, open terminal or cmd and direct to the location of the code. Run 
+```
+npm install
+```
  
  <h3>Google Books API: <br></h3>
  <ul>
@@ -14,7 +19,7 @@
 <h3> Bugs Encoutered: </h3>
 <ol>
  <li>[Not Yet Solved]: There were cases where the API calls might not necessarily return all requested fields. When that happens, the missing fields will cause the entire display view crash. Ideally, is there are missing fields, the view should leave it blank or show some place-holder info. [Encountered 01/30/2022]</li>
- <li>[Not Yet Solved]: When the user find the book they want to review and click on the "Write Review" button, there should be a way to pass all the displaying information to the view where the user can also compose the review. [Encountered 01/30/2022]</li>
+ <li>[Solved 02/07/2021]: When the user find the book they want to review and click on the "Write Review" button, there should be a way to pass all the displaying information to the view where the user can also compose the review. [Encountered 01/30/2022]</li>
 </ol>
  
 <h3> Task Stack at initial launch (v. 1.0.0): </h3>
@@ -24,4 +29,6 @@
  <li> Add additional user information to the account.ejs page.</li>
  <li> Design & implement the category layout. </li>
  <li> Add default posts to show in the index.ejs page. </li>
+ <li> Implement 404 Page </li>
+ <li> favocon </li>
 </ol>
