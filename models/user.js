@@ -20,6 +20,7 @@ const userSchema = new Schema ({
     title: String,
     authors: String,
     imageLink: String,
+    isbnType: String,
     isbn: String,
     reviewTite: String,
     review: String,

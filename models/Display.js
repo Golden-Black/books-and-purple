@@ -18,7 +18,7 @@ const submittedPostSchema = new mongoose.Schema({
     },
     date: String,
     category: String,
-    // user: String
+    userName: String
 })
 
 // create the collection: SubmittedPost
@@ -34,7 +34,6 @@ const item0 = new SubmittedPost({
   date: "Jan 31 2021",
   category: "Fiction"
 });
-
 
 
 const item1 = new SubmittedPost({
@@ -60,7 +59,7 @@ const item2 = new SubmittedPost({
   category: "Business"
 });
 
-item2.save();
+
 
 const item3 = new SubmittedPost({
   title: "Greenlights",
@@ -73,7 +72,7 @@ const item3 = new SubmittedPost({
   category: "Biography"
 });
 
-item3.save();
+
 
 module.exports = mongoose.model('SubmittedPost', submittedPostSchema);
 

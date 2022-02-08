@@ -275,6 +275,15 @@
   padding-bottom: 2rem;
 }
 
+.author-compose{
+  color: purple; 
+  /* background-color: green; 
+  border: 2px green solid;  */
+  border-radius: 12px;
+  font-family: 'Crete Round', serif;
+  margin-bottom: 1rem;
+}
+
 /* Customization for SearchResult Page */
 .searchResult-a{
   padding-top: 1.2rem;

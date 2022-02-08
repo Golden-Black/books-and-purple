@@ -35,6 +35,8 @@ router.post("/login", controller.postLoginPage);
 
 router.post("/signup", controller.postSignupPage);
 
+router.post("/searchBook", controller.postSearchBook);
+
 router.post("/searchResult", controller.postSearchResult);
 
 router.post("/compose", controller.postComposePage);

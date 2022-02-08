@@ -1,7 +1,7 @@
 require('dotenv').config();
 const axios = require('axios');
 const User = require('../models/User');
-const SubmittedPost = require('../models/Display');
+const Display = require('../models/Display');
 const date = require(__dirname + "/date.js");
 const mongoose = require("mongoose");
 const session = require('express-session');
@@ -17,12 +17,9 @@ const {
     json
 } = require('express/lib/response');
 
-// var postings = mongoose.model('SubmittedPost');
-// console.log(submittedPosts);
-
 exports.renderHomePage = (req, res) => {
 
-    SubmittedPost.find(function (err, books) {
+    Display.find(function (err, books) {
         if (err) {
             console.log(err);
         } else {
@@ -50,15 +47,39 @@ exports.renderHomePage = (req, res) => {
 
 
 exports.renderAboutPage = (req, res) => {
-    res.render("about", {
-        title: "About - Book & Purple"
-    });
+    if (req.isAuthenticated()) {
+        res.render("compose", {
+            title: "About - Books & Purple",
+            login: "Logout",
+            signup: req.user.username,
+            date: date.getDate()
+        });
+    } else {
+        res.render("compose", {
+            title: "About - Books & Purple",
+            login: "Login",
+            signup: "Sign Up",
+            date: date.getDate()
+        });
+    }
 };
 
 exports.renderContactPage = (req, res) => {
-    res.render("contact", {
-        title: "Contact - Book & Purple"
-    });
+    if (req.isAuthenticated()) {
+        res.render("contact", {
+            title: "Contact - Books & Purple",
+            login: "Logout",
+            signup: req.user.username,
+            date: day
+        });
+    } else {
+        res.render("contact", {
+            title: "Contact - Books & Purple",
+            login: "Login",
+            signup: "Sign Up",
+            date: day
+        });
+    }
 };
 
 exports.renderAccountPage = (req, res) => {
@@ -116,9 +137,10 @@ exports.renderComposePage = (req, res) => {
         res.render("compose", {
             title: "Compose - Books & Purple",
             login: "Logout",
-            signup: req.user.username 
-        }); 
-    }else{
+            signup: req.user.username,
+            date: today
+        });
+    } else {
         res.redirect("/login");
     }
 }
@@ -179,7 +201,7 @@ exports.postSignupPage = (req, res) => {
                 res.redirect("/signup");
             } else {
                 passport.authenticate("local")(req, res, function () {
-                    SubmittedPost.find(function (err, books) {
+                    Display.find(function (err, books) {
                         if (err) {
                             console.log(err);
                         } else {
@@ -226,16 +248,15 @@ exports.postSignupPage = (req, res) => {
     // })
 };
 
-exports.postSearchResult = (req, res) => {
-
+exports.postSearchBook = (req, res) => {
     if (req.isAuthenticated()) {
-
         const bookTitleSearch = req.body.bookTitle;
         bookTitleSearch.replace(' ', '+');
         const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${bookTitleSearch}&key=${process.env.APIKEY}`;
 
         axios.get(url).then(response => {
             let result = response.data.items;
+            console.log(result[0].volumeInfo.categories);
             res.render("searchResult", {
                 title: "Result - Books & Purple",
                 apiResult: result,
@@ -272,16 +293,91 @@ exports.postSearchResult = (req, res) => {
 
 };
 
-exports.postComposePage = (req, res) => {
-
-    let options = {
-        title: req.body.newTitle,
-        post: req.body.newPost
+exports.postSearchResult = (req, res) => {
+    if (req.isAuthenticated()) {
+        // console.log(req.body.apiResult);
+        res.render("compose", {
+            title: "About - Books & Purple",
+            login: "Logout",
+            signup: req.user.username,
+            date: date.getDate(),
+            title: req.body.apiTitle,
+            authors: req.body.apiAuthors,
+            imageLink: req.body.apiImageLink,
+            description: req.body.apiDescription,
+            type: req.body.apiISBNType,
+            identifier: req.body.apiISBN,
+            category: req.body.apiCategories
+        });
+    } else {
+        res.render("login");
     }
+};
 
-    postsArray.push(options);
-    console.log(postsArray);
-    res.redirect("/");
+exports.postComposePage = (req, res) => {
+    if (req.isAuthenticated()) {
+        User.findById(req.user.id, function (error, userFound) {
+            if (error) {
+                console.log(error);
+                alert("Sorry but an error occurred. Please try again later.")
+            } else {
+                if (userFound) {
+                    // update user post
+                    let newUserPost = {
+                        title: req.body.title,
+                        authors: req.body.authors,
+                        imageLink: req.body.imageLink,
+                        description: req.body.description,
+                        isbnType: req.body.isbnType,
+                        isbn: req.body.isbn,
+                        category: req.body.category,
+                        reviewTitle: req.body.reviewTitle,
+                        review: req.body.bookReview,
+                        date: date.getDate()
+                    }
+                    console.log(newUserPost);
+                    userFound.userPosts.push(newUserPost);
+                    userFound.save(function () {
+                        console.log("User Post saved!");
+                    })
+                    // update the submited posts
+                    const newPost = new Display({
+                        title: req.body.title,
+                        authors: req.body.authors,
+                        imageLink: req.body.imageLink,
+                        isbnType: req.body.isbnType,
+                        isbn: req.body.isbn,
+                        reviewTitle: req.body.reviewTitle,
+                        review: req.body.bookReview,
+                        date: newUserPost.date,
+                        category: req.body.category,
+                        userName: req.user.username
+                    })
+                    newPost.save();
+                    res.redirect("/");
+                }
+            }
+        })
+        // res.render("compose", {
+        //     title: "About - Books & Purple",
+        //     login: "Logout",
+        //     signup: req.user.username,
+        //     date: date.getDate(),
+        //     // Book API Info
+        //     title: req.body.apiTitle,
+        //     authors: req.body.apiAuthors,
+        //     imageLink: req.body.apiImageLink,
+        //     description: req.body.apiDescription,
+        //     type: req.body.apiISBNType,
+        //     identifier: req.body.apiISBN,
+        //     category: req.body.apiCategories,
+        //     // User Response
+        //     reviewTitle: req.body.reviewTitle,
+        //     review: req.body.theReview
+        // });
+    } else {
+        res.render("login");
+    }
 };
 
 
