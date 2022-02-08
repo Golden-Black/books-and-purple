@@ -17,9 +17,11 @@ const {
     json
 } = require('express/lib/response');
 
+
+// =================== For GET Requests =================
 exports.renderHomePage = (req, res) => {
 
-    Display.find(function (err, books) {
+    Display.find(function (err, books) { // find everything
         if (err) {
             console.log(err);
         } else {
@@ -172,6 +174,11 @@ exports.renderForgotPasswordPage = (req, res) => {
     res.render("forgotPassword");
 };
 
+exports.renderReviewsPage = (req, res) => {
+    res.redirect("/");
+};
+
+// =================== For POST Requests =================
 exports.postLoginPage = (req, res) => {
     const user = new User({
         username: req.body.username,
@@ -337,25 +344,44 @@ exports.postComposePage = (req, res) => {
                     }
                     console.log(newUserPost);
                     userFound.userPosts.push(newUserPost);
+
                     userFound.save(function () {
                         console.log("User Post saved!");
+                    });
+                    
+                    // store the post in the submitted posts
+                    Display.findOne({isbn: req.body.isbn}, function(error, existing){
+                        const userPostNew = {
+                            reviewTitle: req.body.reviewTitle,
+                            review: req.body.bookReview,
+                            date: newUserPost.date,
+                            category: req.body.category,
+                            username: req.user.username,
+                            userId: req.user.id
+                        }
+
+
+                        if (!existing) {
+                            // if book not found
+                            const newPost = new Display({
+                                title: req.body.title,
+                                authors: req.body.authors,
+                                imageLink: req.body.imageLink,
+                                isbnType: req.body.isbnType,
+                                isbn: req.body.isbn,
+                                description: req.body.description,
+                                userPost: userPostNew
+                            })
+                            newPost.save();
+                        } else {
+                            // if the book is found
+                            existing.userPost.push(userPostNew);
+                            existing.save();
+                        }
                     })
-                    // update the submited posts
-                    const newPost = new Display({
-                        title: req.body.title,
-                        authors: req.body.authors,
-                        imageLink: req.body.imageLink,
-                        isbnType: req.body.isbnType,
-                        isbn: req.body.isbn,
-                        reviewTitle: req.body.reviewTitle,
-                        review: req.body.bookReview,
-                        date: newUserPost.date,
-                        category: req.body.category,
-                        userName: req.user.username
-                    })
-                    newPost.save();
+
                     res.redirect("/");
-                }
+                }       
             }
         })
         // res.render("compose", {

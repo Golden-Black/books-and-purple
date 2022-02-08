@@ -29,6 +29,8 @@ router.get("/sourceCode", controller.renderSourceCodePage);
 
 router.get("/forgotPassword", controller.renderForgotPasswordPage);
 
+router.get("/:post-id", controller.renderReviewsPage);
+
 
 // Handling POST requests
 router.post("/login", controller.postLoginPage);

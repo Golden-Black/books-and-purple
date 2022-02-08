@@ -21,12 +21,19 @@
                     <div class="card-body">
                         <div>
                             <a href="post-image.html">
-                                <h4 class="card-title"> <%= postings[item].reviewTitle %> </h4>
+                                <!-- postings[item].userPost[postings[item].userPost.length-1] Displaying Latest Post -->
+                                <h4 class="card-title"> <%= postings[item].userPost[postings[item].userPost.length-1].reviewTitle %> </h4>
                             </a>
                         </div>
-                        <p class="card-text"> <%= postings[item].review.substring(0, 165) %> ... Read More </p>
-                        <div class="card-meta">
-                            <p> <%= postings[item].date %> </p>
+                        <p class="card-text"> > <%= postings[item].userPost[postings[item].userPost.length-1].review.substring(0, 165) %> ... <a href="/:<%= postings[item]._id %>" class="index-readMore">&nbsp;Read More&nbsp;</a> </p>
+                        <div class="review-isbn">
+                            <%= postings[item].isbnType %> : <%= postings[item].isbn %>
+                        </div>
+                        <div>
+                            <p><span class="review-username">
+                                <%= postings[item].userPost[postings[item].userPost.length-1].username %>
+                            </span> • 
+                            <span class="card-meta"><%= postings[item].userPost[postings[item].userPost.length-1].date %> </span></p>
                         </div>
                         <div class="container">
                             <div class="row">
@@ -62,14 +69,19 @@
                     <div class="card-body">
                         <div>
                             <a href="post-image.html">
-                                <h4 class="card-title"> <%= postings[item].reviewTitle %> </h4>
+                                <h4 class="card-title"> <%= postings[item].userPost[postings[item].userPost.length-1].reviewTitle %> </h4>
                             </a>
                         </div>
-                        <p class="card-text"> <%= postings[item].review.substring(0, 165) %> ... Read More
+                        <p class="card-text"> > <%= postings[item].userPost[postings[item].userPost.length-1].review.substring(0, 165) %> ... <a href="/<%= postings[item]._id %>" class="index-readMore">&nbsp;Read More&nbsp;</a>
                         </p>
-
-                        <div class="card-meta">
-                            <p> <%= postings[item].date %> </p>
+                        <div class="review-isbn">
+                            <%= postings[item].isbnType %> : <%= postings[item].isbn %>
+                        </div>
+                        <div>
+                            <p><span class="review-username">
+                                <%= postings[item].userPost[postings[item].userPost.length-1].username %>
+                            </span> • 
+                            <span class="card-meta"><%= postings[item].userPost[postings[item].userPost.length-1].date %> </span></p>
                         </div>
                         <div class="container">
                             <div class="row">
@@ -77,10 +89,10 @@
                                     <img src="/img/icons/eye.png" alt="Views Count" height="24"> <%= viewsCount %>
                                 </div>
                                 <div class="col order-1">
-                                    <img src="/img/icons/thumbs-up.png" alt="Like" height="24"> 123
+                                    <img src="/img/icons/thumbs-up.png" alt="Like" height="24"> 77
                                 </div>
                                 <div class="col order-2">
-                                    <img src="/img/icons/thumbs-down.png" alt="Dislike" height="24"> 25
+                                    <img src="/img/icons/thumbs-down.png" alt="Dislike" height="24"> 41
                                 </div>
                             </div>
                         </div>
@@ -170,12 +182,18 @@
                     <div class="card-body">
                         <div>
                             <a href="post-image.html">
-                                <h4 class="card-title"> <%= postings[i].reviewTitle %> </h4>
+                                <h4 class="card-title"> <%= postings[i].userPost[postings[i].userPost.length-1].reviewTitle %> </h4>
                             </a>
                         </div>
-                        <p class="card-text"> <%= postings[i].review.substring(0, 165) %> ... Read More </p>
-                        <div class="card-meta">
-                            <p> <%= postings[i].date %> </p>
+                        <p class="card-text"> > <%= postings[i].userPost[postings[i].userPost.length-1].review.substring(0, 165) %> ... <a href="/<%= postings[i]._id %>" class="index-readMore">&nbsp;Read More&nbsp;</a> </p>
+                        <div class="review-isbn">
+                            <%= postings[i].isbnType %> : <%= postings[i].isbn %>
+                        </div>
+                        <div>
+                            <p><span class="review-username">
+                                <%= postings[i].userPost[postings[i].userPost.length-1].username %>
+                            </span> • 
+                            <span class="card-meta"><%= postings[i].userPost[postings[i].userPost.length-1].date %> </span></p>
                         </div>
                         <div class="container">
                             <div class="row">
@@ -183,10 +201,10 @@
                                     <img src="/img/icons/eye.png" alt="Views Count" height="24"> <%= viewsCount %>
                                 </div>
                                 <div class="col order-1">
-                                    <img src="/img/icons/thumbs-up.png" alt="Like" height="24"> 123
+                                    <img src="/img/icons/thumbs-up.png" alt="Like" height="24"> 81
                                 </div>
                                 <div class="col order-2">
-                                    <img src="/img/icons/thumbs-down.png" alt="Dislike" height="24"> 25
+                                    <img src="/img/icons/thumbs-down.png" alt="Dislike" height="24"> 27
                                 </div>
                             </div>
                         </div>
@@ -212,14 +230,18 @@
                     <div class="card-body">
                         <div>
                             <a href="post-image.html">
-                                <h4 class="card-title"> <%= postings[x].reviewTitle %> </h4>
+                                <h4 class="card-title"> <%= postings[x].userPost[postings[x].userPost.length-1].reviewTitle %> </h4>
                             </a>
                         </div>
-                        <p class="card-text"> <%= postings[x].review.substring(0, 165) %> ... Read More
-                        </p>
-
-                        <div class="card-meta">
-                            <p> <%= postings[x].date %> </p>
+                        <p class="card-text"> > <%= postings[x].userPost[postings[x].userPost.length-1].review.substring(0, 165) %> ... <a href="/<%= postings[x]._id %>" class="index-readMore">&nbsp;Read More&nbsp;</a></p>
+                        <div class="review-isbn">
+                            <%= postings[x].isbnType %> : <%= postings[x].isbn %>
+                        </div>
+                        <div>
+                            <p><span class="review-username">
+                                <%= postings[x].userPost[postings[x].userPost.length-1].username %>
+                            </span> • 
+                            <span class="card-meta"><%= postings[x].userPost[postings[x].userPost.length-1].date %> </span></p>
                         </div>
                         <div class="container">
                             <div class="row">
@@ -227,10 +249,10 @@
                                     <img src="/img/icons/eye.png" alt="Views Count" height="24"> <%= viewsCount %>
                                 </div>
                                 <div class="col order-1">
-                                    <img src="/img/icons/thumbs-up.png" alt="Like" height="24"> 123
+                                    <img src="/img/icons/thumbs-up.png" alt="Like" height="24"> 91
                                 </div>
                                 <div class="col order-2">
-                                    <img src="/img/icons/thumbs-down.png" alt="Dislike" height="24"> 25
+                                    <img src="/img/icons/thumbs-down.png" alt="Dislike" height="24"> 19
                                 </div>
                             </div>
                         </div>

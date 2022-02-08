@@ -16,6 +16,7 @@ Bugs Encoutered:
 <ol>
  <li>[Not Yet Solved]: There were cases where the API calls might not necessarily return all requested fields. When that happens, the missing fields will cause the entire display view crash. Ideally, is there are missing fields, the view should leave it blank or show some place-holder info. [Encountered 01/30/2022]</li>
  <li>[Solved 02/07/2021]: When the user find the book they want to review and click on the "Write Review" button, there should be a way to pass all the displaying information to the view where the user can also compose the review. [Encountered 01/30/2022]</li>
+ <li>[Not Yet Solved]: There are four conditions to handle when the user is completing the review. On the user side: 1. If the user never post any reviews about a book; 2. If the user is posting to a book for which the user has previously written review(s). One the display side: 1. No previous post about the book at all. 2. There are already reviews about the book posted by other users. [Encountered 02/07/2022] </li>
 </ol>
  
 Run the App locally:
@@ -26,12 +27,14 @@ All needed dependencies are included in the package.json file. Clone the projece
 <br>
 <br>After dependencies are all successfully installed, start the project by entering in the terminal<br>
 ```nodemon app.js``` OR ```node app.js```
+<br>Go to Google API and acquire your own API key. After that, create a .env file and type in ```APIKEY = YOUR_API_KEY```, and then save the file.
 
 <br> Connect the project to a local MongoDB database:
 <br> Open browser and run the project locally by typing in ```localhost:3000```
 
-Task Stack at initial launch (v. 1.0.0):
+Task Stack:
 ------------------------------
+<h4>Initial Launch (v. 1.0.0)</h4>
 <ol>
  <li> Fix the <b>Load More</b> button in the index page in both the posts & the category column. </li>
  <li> Add user email to the database. </li>
@@ -40,4 +43,9 @@ Task Stack at initial launch (v. 1.0.0):
  <li> Add default posts to show in the index.ejs page. </li>
  <li> Implement 404 Page </li>
  <li> favocon </li>
+</ol>
+
+<h4>(v. 1.1.0)</h4>
+<ol>
+  <li>RESTful API design</li>
 </ol>

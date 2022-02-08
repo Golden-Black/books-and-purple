@@ -112,6 +112,24 @@
   background-color: #fdfdfc;
 }
 
+.review-username {
+  font-family: 'Bree Serif', serif;
+  /* color: rgb(3, 0, 177); */
+  color: black;
+}
+
+.review-isbn{
+  font-family: 'Bree Serif', serif;
+  /* color: black; */
+  color: black;
+}
+
+.index-readMore{
+  color: black !important;
+  border: 1px black solid;
+  border-radius: 12px;
+}
+
 /* Customization for Signup Page*/
 .signup-backgd {
   background-image: url("/img/background-image/signup-bg-1.png");
