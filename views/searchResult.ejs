@@ -12,26 +12,97 @@
             <!-- Col 1-->
             <article class="card mb-4">
                 <form action="/searchResult" method="POST">
-                    <a href="post-image.html" class="searchResult-a">
-                        <img class="card-img" src="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>" alt=" img" />
-                    </a>
-                    <h4 class="sr-card-title"> <%= apiResult[i].volumeInfo.title %> </h4>
-                    <div id="author"><a class="author-yellow" href="#">&nbsp;<span class="by">by</span>&nbsp;
-                            <%= apiResult[i].volumeInfo.authors %> &nbsp;</a></div>
+                    <!-- Check Image -->
+                    <div class="searchResult-a">
+                        <% if(!apiResult[i].volumeInfo.imageLinks) {%>
+                        <img class="card-img" src="/img/other/nailed-note.png" alt=" img">
+                        <% }else{ %>
+                        <img class="card-img" src="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>" alt=" img">
+                        <% } %>
+                    </div>
+
+                    <!-- Check Title -->
+                    <h4 class="sr-card-title">
+                        <% if(apiResult[i].volumeInfo.title) {%>
+                        <span><%= apiResult[i].volumeInfo.title %></span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
+                    </h4>
+
+                    <!-- Check Authors -->
+                    <div id="author">&nbsp;<span class="by">by</span>
+                        <% if(apiResult[i].volumeInfo.authors) {%>
+                        <span class="author-yellow" href="#">&nbsp; <%= apiResult[i].volumeInfo.authors %> &nbsp;</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
+                    </div>
+
+                    <!-- Check Description -->
                     <div class="sr-card-body" data-value="description" id="desc">
+                        <% if(apiResult[i].volumeInfo.description) {%>
                         <p id="imgg" class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
                             <%= apiResult[i].volumeInfo.description.substring(0, 165) %> <span> &nbsp; ...</span></p>
+                        <% }else{ %>
+                        <p id="imgg" class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
+                            Description not available. <span> &nbsp;</span></p>
+                        <% } %>
                     </div>
-                    <div class="sr-isbn"><%= apiResult[i].volumeInfo.industryIdentifiers[0].type %>: &nbsp;
-                        <%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %> </div>
 
-                    <div style="display: none"><input name="apiTitle" value="<%= apiResult[i].volumeInfo.title %>">
+                    <!-- Check ISBN Type -->
+                    <div class="sr-isbn">
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
+                        <span><%= apiResult[i].volumeInfo.industryIdentifiers[0].type %> : &nbsp;</span>
+                        <% }else{ %>
+                        <span>ISBN Unavailable</span>
+                        <% } %> 
+
+                        <!-- Check ISBN -->
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
+                        <span><%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %></span>
+                        <% }else{ %>
+                        <span>&nbsp;</span>
+                        <% } %>
+                    </div>
+
+                    <div style="display: none">
+                        <!-- Passing Title -->
+                        <% if(apiResult[i].volumeInfo.title) {%>
+                        <input name="apiTitle" value="<%= apiResult[i].volumeInfo.title %>">
+                        <% } %>
+
+                        <!-- Passing Authors -->
+                        <% if(apiResult[i].volumeInfo.authors) {%>
                         <input name="apiAuthors" value="<%= apiResult[i].volumeInfo.authors %>">
+                        <% } %>
+
+                        <!-- Passing ImageLink -->
+                        <% if(apiResult[i].volumeInfo.imageLinks) {%>
                         <input name="apiImageLink" value="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>">
+                        <% }else{ %>
+                        <input name="apiImageLink" value="/img/other/nailed-note.png">
+                        <% } %>
+
+                        <!-- Passing Description -->
+                        <% if(apiResult[i].volumeInfo.description) {%>
                         <input name="apiDescription" value="<%= apiResult[i].volumeInfo.description %>">
+                        <% } %>
+
+                        <!-- Passing Type -->
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
                         <input name="apiISBNType" value="<%= apiResult[i].volumeInfo.industryIdentifiers[0].type %>">
+                        <% } %>
+
+                        <!-- Passing ISBN -->
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
                         <input name="apiISBN" value="<%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %>">
+                        <% } %>
+
+                        <!-- Passing category -->
+                        <% if(apiResult[i].volumeInfo.categories) {%>
                         <input name="apiCategories" value="<%= apiResult[i].volumeInfo.categories %>">
+                        <% } %>
                     </div>
                     <!-- <div style="display: none"><input name="apiObj" value="<%= apiResult %>"></div>
                     <div style="display: none"><input name="apiObj" value="<%= i %>"></div> -->
@@ -50,29 +121,98 @@
 
             <article class="card mb-4">
                 <form action="/searchResult" method="POST">
-                    <a href="post-image.html" class="searchResult-a">
-                        <img class="card-img" src="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>" alt=" img" />
-                    </a>
-                    <h4 class="sr-card-title"> <%= apiResult[i].volumeInfo.title %> </h4>
-                    <div><a class="author-red" href="#">&nbsp;<span class="by">by</span>&nbsp;
-                            <%= apiResult[i].volumeInfo.authors %> &nbsp;</a></div>
-                    <div class="sr-card-body">
-                        <p class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
-                            <%= apiResult[i].volumeInfo.description.substring(0, 165) %> <span> &nbsp; ...</span></p>
+                    <!-- Check Image -->
+                    <div class="searchResult-a">
+                        <% if(!apiResult[i].volumeInfo.imageLinks) {%>
+                        <img class="card-img" src="/img/other/nailed-note.png" alt=" img">
+                        <% }else{ %>
+                        <img class="card-img" src="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>" alt=" img">
+                        <% } %>
                     </div>
-                    <div class="sr-isbn"><%= apiResult[i].volumeInfo.industryIdentifiers[0].type %>: &nbsp;
-                        <%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %> </div>
 
-                    <div style="display: none"><input name="apiTitle" value="<%= apiResult[i].volumeInfo.title %>">
+                    <!-- Check Title -->
+                    <h4 class="sr-card-title">
+                        <% if(apiResult[i].volumeInfo.title) {%>
+                        <span><%= apiResult[i].volumeInfo.title %></span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
+                    </h4>
+
+                    <!-- Check Authors -->
+                    <div id="author">&nbsp;<span class="by">by</span>
+                        <% if(apiResult[i].volumeInfo.authors) {%>
+                        <span class="author-yellow" href="#">&nbsp;<%= apiResult[i].volumeInfo.authors %> &nbsp;</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
                     </div>
-                    <div style="display: none"><input name="apiAuthors" value="<%= apiResult[i].volumeInfo.authors %>">
+
+                    <!-- Check Description -->
+                    <div class="sr-card-body" data-value="description" id="desc">
+                        <% if(apiResult[i].volumeInfo.description) {%>
+                        <p id="imgg" class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
+                            <%= apiResult[i].volumeInfo.description.substring(0, 165) %> <span> &nbsp; ...</span></p>
+                        <% }else{ %>
+                        <p id="imgg" class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
+                            Description not available. <span> &nbsp;</span></p>
+                        <% } %>
                     </div>
+
+                    <!-- Check ISBN Type -->
+                    <div class="sr-isbn">
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
+                        <span><%= apiResult[i].volumeInfo.industryIdentifiers[0].type %>: &nbsp;</span>
+                        <% }else{ %>
+                        <span>ISBN Unavailable</span>
+                        <% } %> 
+
+                        <!-- Check ISBN -->
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
+                        <span><%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %></span>
+                        <% }else{ %>
+                        <span>&nbsp;</span>
+                        <% } %>
+                    </div>
+
+
                     <div style="display: none">
+                        <!-- Passing Title -->
+                        <% if(apiResult[i].volumeInfo.title) {%>
+                        <input name="apiTitle" value="<%= apiResult[i].volumeInfo.title %>">
+                        <% } %>
+
+                        <!-- Passing Authors -->
+                        <% if(apiResult[i].volumeInfo.authors) {%>
+                        <input name="apiAuthors" value="<%= apiResult[i].volumeInfo.authors %>">
+                        <% } %>
+
+                        <!-- Passing ImageLink -->
+                        <% if(apiResult[i].volumeInfo.imageLinks) {%>
                         <input name="apiImageLink" value="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>">
+                        <% }else{ %>
+                        <input name="apiImageLink" value="/img/other/nailed-note.png">
+                        <% } %>
+
+                        <!-- Passing Description -->
+                        <% if(apiResult[i].volumeInfo.description) {%>
                         <input name="apiDescription" value="<%= apiResult[i].volumeInfo.description %>">
+                        <% } %>
+
+                        <!-- Passing Type -->
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
                         <input name="apiISBNType" value="<%= apiResult[i].volumeInfo.industryIdentifiers[0].type %>">
+                        <% } %>
+
+                        <!-- Passing ISBN -->
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
                         <input name="apiISBN" value="<%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %>">
+                        <% } %>
+
+                        <!-- Passing category -->
+                        <% if(apiResult[i].volumeInfo.categories) {%>
                         <input name="apiCategories" value="<%= apiResult[i].volumeInfo.categories %>">
+                        <% } %>
                     </div>
 
                     <button type="submit" class="btn btn-primary sr-button">Write Review</button>
@@ -89,28 +229,98 @@
 
             <article class="card mb-4">
                 <form action="/searchResult" method="POST">
-                    <a href="post-image.html" class="searchResult-a">
-                        <img class="card-img" src="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>" alt=" img" />
-                    </a>
-                    <h4 class="sr-card-title"> <%= apiResult[i].volumeInfo.title %> </h4>
-                    <div><a class="author-green" href="#">&nbsp;<span class="by">by</span>&nbsp;
-                            <%= apiResult[i].volumeInfo.authors %> &nbsp;</a></div>
-                    <div class="sr-card-body">
-                        <p class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
-                            <%= apiResult[i].volumeInfo.description.substring(0, 165) %> <span> &nbsp; ...</span></p>
+                    <!-- Check Image -->
+                    <div class="searchResult-a">
+                        <% if(!apiResult[i].volumeInfo.imageLinks) {%>
+                        <img class="card-img" src="/img/other/nailed-note.png" alt=" img">
+                        <% }else{ %>
+                        <img class="card-img" src="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>" alt=" img">
+                        <% } %>
                     </div>
-                    <div class="sr-isbn"><%= apiResult[i].volumeInfo.industryIdentifiers[0].type %>: &nbsp;
-                        <%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %> </div>
-                    <!-- <div class="sr-isbn"><%= apiResult[i].volumeInfo.industryIdentifiers[1].type %>: &nbsp; <%= apiResult[i].volumeInfo.industryIdentifiers[1].identifier %> </div> -->
+
+                    <!-- Check Title -->
+                    <h4 class="sr-card-title">
+                        <% if(apiResult[i].volumeInfo.title) {%>
+                        <span><%= apiResult[i].volumeInfo.title %></span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
+                    </h4>
+
+                    <!-- Check Authors -->
+                    <div id="author">&nbsp;<span class="by">by</span>
+                        <% if(apiResult[i].volumeInfo.authors) {%>
+                        <span class="author-yellow" href="#">&nbsp;<%= apiResult[i].volumeInfo.authors %> &nbsp;</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
+                    </div>
+
+
+                    <!-- Check Description -->
+                    <div class="sr-card-body" data-value="description" id="desc">
+                        <% if(apiResult[i].volumeInfo.description) {%>
+                        <p id="imgg" class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
+                            <%= apiResult[i].volumeInfo.description.substring(0, 165) %> <span> &nbsp; ...</span></p>
+                        <% }else{ %>
+                        <p id="imgg" class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
+                            Description not available. <span> &nbsp;</span></p>
+                        <% } %>
+                    </div>
+
+                    <!-- Check ISBN Type -->
+                    <div class="sr-isbn">
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
+                        <span><%= apiResult[i].volumeInfo.industryIdentifiers[0].type %> : &nbsp;</span>
+                        <% }else{ %>
+                        <span>ISBN Unavailable</span>
+                        <% } %> 
+
+                        <!-- Check ISBN -->
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
+                        <span><%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %></span>
+                        <% }else{ %>
+                        <span>&nbsp;</span>
+                        <% } %>
+                    </div>
 
                     <div style="display: none">
+                        <!-- Passing Title -->
+                        <% if(apiResult[i].volumeInfo.title) {%>
                         <input name="apiTitle" value="<%= apiResult[i].volumeInfo.title %>">
+                        <% } %>
+
+                        <!-- Passing Authors -->
+                        <% if(apiResult[i].volumeInfo.authors) {%>
                         <input name="apiAuthors" value="<%= apiResult[i].volumeInfo.authors %>">
+                        <% } %>
+
+                        <!-- Passing ImageLink -->
+                        <% if(apiResult[i].volumeInfo.imageLinks) {%>
                         <input name="apiImageLink" value="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>">
+                        <% }else{ %>
+                        <input name="apiImageLink" value="/img/other/nailed-note.png">
+                        <% } %>
+
+                        <!-- Passing Description -->
+                        <% if(apiResult[i].volumeInfo.description) {%>
                         <input name="apiDescription" value="<%= apiResult[i].volumeInfo.description %>">
+                        <% } %>
+
+                        <!-- Passing Type -->
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
                         <input name="apiISBNType" value="<%= apiResult[i].volumeInfo.industryIdentifiers[0].type %>">
+                        <% } %>
+
+                        <!-- Passing ISBN -->
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
                         <input name="apiISBN" value="<%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %>">
+                        <% } %>
+
+                        <!-- Passing category -->
+                        <% if(apiResult[i].volumeInfo.categories) {%>
                         <input name="apiCategories" value="<%= apiResult[i].volumeInfo.categories %>">
+                        <% } %>
                     </div>
 
 
@@ -127,28 +337,97 @@
         <div class="col-md-3">
             <article class="card mb-4">
                 <form action="/searchResult" method="POST">
-                    <a href="post-image.html" class="searchResult-a">
-                        <img class="card-img" src="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>" alt=" img" />
-                    </a>
-                    <h4 class="sr-card-title"> <%= apiResult[i].volumeInfo.title %> </h4>
-                    <div><a class="author-pink" href="#">&nbsp;<span class="by">by</span>&nbsp;
-                            <%= apiResult[i].volumeInfo.authors %> &nbsp;</a></div>
-                    <div class="sr-card-body">
-                        <p class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
-                            <%= apiResult[i].volumeInfo.description.substring(0, 165) %> <span> &nbsp; ...</span></p>
+                    <!-- image -->
+                    <div class="searchResult-a">
+                        <% if(!apiResult[i].volumeInfo.imageLinks) {%>
+                        <img class="card-img" src="/img/other/nailed-note.png" alt=" img">
+                        <% }else{ %>
+                        <img class="card-img" src="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>" alt=" img">
+                        <% } %>
                     </div>
-                    <div class="sr-isbn"><%= apiResult[i].volumeInfo.industryIdentifiers[0].type %>: &nbsp;
-                        <%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %> </div>
-                    <!-- <div class="sr-isbn"><%= apiResult[i].volumeInfo.industryIdentifiers[1].type %>: &nbsp; <%= apiResult[i].volumeInfo.industryIdentifiers[1].identifier %> </div> -->
+
+                    <!-- Check Title -->
+                    <h4 class="sr-card-title">
+                        <% if(apiResult[i].volumeInfo.title) {%>
+                        <span><%= apiResult[i].volumeInfo.title %></span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
+                    </h4>
+
+                    <!-- Check Authors -->
+                    <div id="author">&nbsp;<span class="by">by</span>
+                        <% if(apiResult[i].volumeInfo.authors) {%>
+                        <span class="author-yellow" href="#">&nbsp;<%= apiResult[i].volumeInfo.authors %> &nbsp;</span>
+                        <% }else{ %>
+                        <span></span>
+                        <% } %>
+                    </div>
+
+                    <!-- Check Description -->
+                    <div class="sr-card-body" data-value="description" id="desc">
+                        <% if(apiResult[i].volumeInfo.description) {%>
+                        <p id="imgg" class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
+                            <%= apiResult[i].volumeInfo.description.substring(0, 165) %> <span> &nbsp; ... </span></p>
+                        <% }else{ %>
+                        <p id="imgg" class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
+                            Description not available. <span> &nbsp; </span></p>
+                        <% } %>
+                    </div>
+
+                    <!-- Check ISBN Type -->
+                    <div class="sr-isbn">
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
+                        <span><%= apiResult[i].volumeInfo.industryIdentifiers[0].type %> : &nbsp;</span>
+                        <% }else{ %>
+                        <span>ISBN Unavailable</span>
+                        <% } %> 
+
+                        <!-- Check ISBN -->
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
+                        <span><%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %></span>
+                        <% }else{ %>
+                        <span>&nbsp;</span>
+                        <% } %>
+                    </div>
 
                     <div style="display: none">
+                        <!-- Passing Title -->
+                        <% if(apiResult[i].volumeInfo.title) {%>
                         <input name="apiTitle" value="<%= apiResult[i].volumeInfo.title %>">
+                        <% } %>
+
+                        <!-- Passing Authors -->
+                        <% if(apiResult[i].volumeInfo.authors) {%>
                         <input name="apiAuthors" value="<%= apiResult[i].volumeInfo.authors %>">
+                        <% } %>
+
+                        <!-- Passing ImageLink -->
+                        <% if(apiResult[i].volumeInfo.imageLinks) {%>
                         <input name="apiImageLink" value="<%= apiResult[i].volumeInfo.imageLinks.thumbnail %>">
+                        <% }else{ %>
+                        <input name="apiImageLink" value="/img/other/nailed-note.png">
+                        <% } %>
+
+                        <!-- Passing Description -->
+                        <% if(apiResult[i].volumeInfo.description) {%>
                         <input name="apiDescription" value="<%= apiResult[i].volumeInfo.description %>">
+                        <% } %>
+
+                        <!-- Passing Type -->
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
                         <input name="apiISBNType" value="<%= apiResult[i].volumeInfo.industryIdentifiers[0].type %>">
+                        <% } %>
+
+                        <!-- Passing ISBN -->
+                        <% if(apiResult[i].volumeInfo.industryIdentifiers) {%>
                         <input name="apiISBN" value="<%= apiResult[i].volumeInfo.industryIdentifiers[0].identifier %>">
+                        <% } %>
+
+                        <!-- Passing category -->
+                        <% if(apiResult[i].volumeInfo.categories) {%>
                         <input name="apiCategories" value="<%= apiResult[i].volumeInfo.categories %>">
+                        <% } %>
                     </div>
 
                     <button type="submit" class="btn btn-primary sr-button">Write Review</button>
