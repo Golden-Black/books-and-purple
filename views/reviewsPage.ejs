@@ -1,0 +1,40 @@
+<%- include("./partials/headers") -%>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <a href="#" class="searchResult-a">
+                <img class="card-img" src="<%= imageLinkEjs %>" alt=" img unavailable">
+            </a>
+        </div>
+        <div class="col-md-9">
+            <h4 class="sr-card-title"> <%= bookTitleEjs %> </h4>
+            <div><a class="author-compose" href="#">&nbsp;<span class="by">by</span>&nbsp;
+                    <%= authorsEjs %> &nbsp;</a></div>
+            <div class="sr-card-body">
+                <p class="card-text"><span class="sr-description">&nbsp; Description: </span> &nbsp;
+                    <%= descriptionEjs %> </p>
+            </div>
+            <div class="sr-card-body">
+                <p class="card-text"><span class="sr-description">&nbsp; Category: </span> &nbsp;
+                    <%= categoryEjs %> <span> &nbsp;</span></p>
+            </div>
+            <div class="sr-isbn"><%= type %>: &nbsp; <%= identifier %> </div>
+        </div>
+    </div>
+    <hr>
+
+    <div>
+        <% for(var item = 0; item < usersPosts.length; item++){ %>
+            <div class="card-title"><h3> <%= usersPosts[item].reviewTitle %> </h3> </div>
+            <div><p class="card-text"> <%= usersPosts[item].review %> </p></div>
+            <div> <span class="review-username"><%= usersPosts[item].username %></span> • <span class="author-compose"><%= usersPosts[item].date%></span> </div>
+            <hr>    
+        <% } %>
+    </div>
+</div>
+
+<br>
+<br>
+<%- include("./partials/footers") -%>

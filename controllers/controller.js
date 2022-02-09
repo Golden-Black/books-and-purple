@@ -16,6 +16,7 @@ const {
 const {
     json
 } = require('express/lib/response');
+const { addListener } = require('../models/Display');
 
 
 // =================== For GET Requests =================
@@ -175,7 +176,62 @@ exports.renderForgotPasswordPage = (req, res) => {
 };
 
 exports.renderReviewsPage = (req, res) => {
-    res.redirect("/");
+    let postID = req.params.postId;
+    var bookTitle, authors, imagelink, description, isbnType, isbn, category="";
+
+    Display.findById(postID, function (error, reviewFound){
+        if(error){
+            console.log(error);
+            // alert("Sorry! An error has occurred. You will be redirected to the home page.");
+            res.redirect("/");
+        }else{
+            if(reviewFound){
+                bookTitle = reviewFound.title;
+                authors = reviewFound.authors;
+                imageLink = reviewFound.imageLink;
+                description = reviewFound.description;
+                isbnType = reviewFound.isbnType;
+                isbn = reviewFound.isbn;
+                category = reviewFound.category
+
+                if (req.isAuthenticated()){
+                    res.render("reviewsPage", {
+                        title: "Your account - Books & Purple",
+                        login: "Logout",
+                        signup: req.user.username,
+                        bookTitleEjs: bookTitle,
+                        authorsEjs: authors,
+                        imageLinkEjs: imageLink,
+                        descriptionEjs: description,
+                        type: isbnType,
+                        identifier: isbn,
+                        categoryEjs: category,
+                        usersPosts: reviewFound.userPost
+                    });
+                }else{
+                    res.render("reviewsPage", {
+                        title: "Your account - Books & Purple",
+                        login: "Login",
+                        signup: "Sign Up",
+                        bookTitleEjs: bookTitle,
+                        authorsEjs: authors,
+                        imageLinkEjs: imageLink,
+                        descriptionEjs: description,
+                        type: isbnType,
+                        identifier: isbn,
+                        categoryEjs: category,
+                        usersPosts: reviewFound.userPost
+                    });
+                }
+
+            }else{
+                // alter("Sorry! The article can no longer be found. You will be redirected to the home page");
+                res.redirect("/");
+            }
+        }
+    })
+
+
 };
 
 // =================== For POST Requests =================
@@ -370,6 +426,7 @@ exports.postComposePage = (req, res) => {
                                 isbnType: req.body.isbnType,
                                 isbn: req.body.isbn,
                                 description: req.body.description,
+                                category: req.body.category,
                                 userPost: userPostNew
                             })
                             newPost.save();
@@ -384,23 +441,6 @@ exports.postComposePage = (req, res) => {
                 }       
             }
         })
-        // res.render("compose", {
-        //     title: "About - Books & Purple",
-        //     login: "Logout",
-        //     signup: req.user.username,
-        //     date: date.getDate(),
-        //     // Book API Info
-        //     title: req.body.apiTitle,
-        //     authors: req.body.apiAuthors,
-        //     imageLink: req.body.apiImageLink,
-        //     description: req.body.apiDescription,
-        //     type: req.body.apiISBNType,
-        //     identifier: req.body.apiISBN,
-        //     category: req.body.apiCategories,
-        //     // User Response
-        //     reviewTitle: req.body.reviewTitle,
-        //     review: req.body.theReview
-        // });
     } else {
         res.render("login");
     }
@@ -413,44 +453,5 @@ exports.postSuccessPage = async (req, res) => {
     const reviewTitle = req.body.reviewTitle;
     const review = req.body.review;
     const category = req.body.category;
-
-
-
-    // const newPost = new Display({
-    //     title: req.body.bookTitle,
-    //     authors: req.body.bookAuthor,
-    //     imageLink: req.body.imageLink,
-    //     isbn: req.body.ISBN,
-    //     reviewTitle: req.body.bookReview,
-    //     review: req.body.bookReview,
-    //     date: day,
-    //     category: req.body.category
-    // });
-
-
-    // const userPost = new userSchema.userPosts({
-    //     title: req.body.bookTitle,
-    //     authors: req.body.bookAuthor,
-    //     imageLink: req.body.imageLink,
-    //     isbn: req.body.ISBN,
-    //     reviewTitle: req.body.bookReview,
-    //     review: req.body.bookReview,
-    //     date: day,
-    //     category: req.body.category
-    // });
-
-    // try {
-    //     User.findOne({
-    //         username: req.body.username
-    //     }, function (err, foundUser) {
-    //         foundUser.userPosts.push(userPost);
-    //         foundUser.save();
-    //     })
-    //     articles = await newPost.save();
-    //     res.redirect("success");
-    // } catch (err) {
-    //     console.log(err);
-    //     res.redirect("/");
-    // }
 
 }

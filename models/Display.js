@@ -11,6 +11,7 @@ const submittedPostSchema = new mongoose.Schema({
   isbnType: String,
   isbn: String,
   description: String,
+  category: String,
   // userpost
   userPost: [{
     username: String,
