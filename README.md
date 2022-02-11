@@ -26,41 +26,37 @@ All needed dependencies are included in the package.json file. Clone the projece
 ```nodemon app.js``` OR ```node app.js```
 <br>Go to Google API and acquire your own API key. After that, create a .env file and type in ```APIKEY = YOUR_API_KEY```, and then save the file.
 
-<br> Connect the project to a local MongoDB database:
+<br> Connect the project to a local MongoDB database: Go to MongoDB Altas. Create a user and MAKE SURE memorize your admin username and passowrd. Choose "Connect to Application" and follow the instructions to copy and paste the code to replace your local database address (such as ```//localhost: 21701/```) and change the <username> and <password> to the corresponding values.
 <br> Open browser and run the project locally by typing in ```localhost:3000```
 
 Task Stack:
 ------------------------------
 <h4>Initial Launch (v. 1.0.0) 02/09/2022</h4>
 <ol>
-  <li> ~~API null return~~</li>
+ <li> <strike>API null return</strike></li>
 </ol>
-<br>
 
 <h4>v. 1.0.1</h4>
 <ol>
- <li> ~~Add user email to the database.~~ </li>
- <li> ~~Add default posts to show in the index.ejs page.~~ </li>
+ <li> <strike>Add user email to the database.</strike> </li>
+ <li> <strike>Add default posts to show in the index.ejs page.</strike></li>
  <li> Design & implement the category layout. </li>
- <li> Implement 404 Page </li>
+ <li> Complete 404 Page Routing</li>
 </ol>
-<br>
 
 <h4>v. 1.0.2</h4>
 <ol>
-  <li>
-    <li> Add additional user information to the account.ejs page.</li>
-    <li> favicon </li>
-    <li> Fix the <b>Load More</b> button in the index page in both the posts & the category column. </li>
-  </li>
+ <li> Fix the size for search book button. </li>
+ <li> Add additional user information to the account.ejs page.</li>
+ <li> favicon </li>
+ <li> Fix the <b>Load More</b> button in the index page in both the posts & the category column. </li>
+ </li>
 </ol>
-<br>
 
 <h4>v. 1.0.3</h4>
 <ol>
-  </li> Implement Delete Post.</li>
+  <li>Implement Delete function.</li>
 </ol>
-<br>
 
 <h4>v. 1.1.0</h4>
 <ol>
