@@ -29,8 +29,22 @@ router.get("/sourceCode", controller.renderSourceCodePage);
 
 router.get("/forgotPassword", controller.renderForgotPasswordPage);
 
-router.get("/:postId", controller.renderReviewsPage);
+// Handling GET requests for Popular Categories
+router.get("/biography", controller.renderBiographyPage);
 
+router.get("/business", controller.renderBusinessPage);
+
+router.get("/fiction", controller.renderFictionPage);
+
+router.get("/history", controller.renderHistoryPage);
+
+router.get("/nonFiction", controller.renderNonFictionPage);
+
+router.get("/science", controller.renderSciencePage);
+
+router.get("/selfHelp", controller.renderSelfHelpPage);
+
+router.get("/:postId", controller.renderReviewsPage);
 
 // Handling POST requests
 router.post("/login", controller.postLoginPage);

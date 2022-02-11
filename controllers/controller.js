@@ -16,7 +16,9 @@ const {
 const {
     json
 } = require('express/lib/response');
-const { addListener } = require('../models/Display');
+const {
+    addListener
+} = require('../models/Display');
 
 
 // =================== For GET Requests =================
@@ -68,19 +70,20 @@ exports.renderAboutPage = (req, res) => {
 };
 
 exports.renderContactPage = (req, res) => {
+    const thisDay = date.getDate();
     if (req.isAuthenticated()) {
         res.render("contact", {
             title: "Contact - Books & Purple",
             login: "Logout",
             signup: req.user.username,
-            date: day
+            date: thisDay
         });
     } else {
         res.render("contact", {
             title: "Contact - Books & Purple",
             login: "Login",
             signup: "Sign Up",
-            date: day
+            date: thisDay
         });
     }
 };
@@ -177,15 +180,15 @@ exports.renderForgotPasswordPage = (req, res) => {
 
 exports.renderReviewsPage = (req, res) => {
     let postID = req.params.postId;
-    var bookTitle, authors, imagelink, description, isbnType, isbn, category="";
+    var bookTitle, authors, imageLink, description, isbnType, isbn, category = "";
 
-    Display.findById(postID, function (error, reviewFound){
-        if(error){
+    Display.findById(postID, function (error, reviewFound) {
+        if (error) {
             console.log(error);
             // alert("Sorry! An error has occurred. You will be redirected to the home page.");
             res.redirect("/");
-        }else{
-            if(reviewFound){
+        } else {
+            if (reviewFound) {
                 bookTitle = reviewFound.title;
                 authors = reviewFound.authors;
                 imageLink = reviewFound.imageLink;
@@ -194,7 +197,7 @@ exports.renderReviewsPage = (req, res) => {
                 isbn = reviewFound.isbn;
                 category = reviewFound.category
 
-                if (req.isAuthenticated()){
+                if (req.isAuthenticated()) {
                     res.render("reviewsPage", {
                         title: "Your account - Books & Purple",
                         login: "Logout",
@@ -208,7 +211,7 @@ exports.renderReviewsPage = (req, res) => {
                         categoryEjs: category,
                         usersPosts: reviewFound.userPost
                     });
-                }else{
+                } else {
                     res.render("reviewsPage", {
                         title: "Your account - Books & Purple",
                         login: "Login",
@@ -224,7 +227,7 @@ exports.renderReviewsPage = (req, res) => {
                     });
                 }
 
-            }else{
+            } else {
                 // alter("Sorry! The article can no longer be found. You will be redirected to the home page");
                 res.redirect("/");
             }
@@ -233,6 +236,210 @@ exports.renderReviewsPage = (req, res) => {
 
 
 };
+
+// =================== For GET requests for Popular Categories =================
+
+exports.renderBiographyPage = (req, res) => {
+    Display.find({
+        $or:[ {category: "Biography & Autobiography"}, {category: "Biography"}]
+    }, function (error, results) {
+        if (error) {
+            res.send(error);
+        } else {
+            if (req.isAuthenticated()) {
+                res.render("category", {
+                    title: "#Biography - Books & Purple",
+                    login: "Logout",
+                    signup: req.user.username,
+                    books: results,
+                    bookCategory: "biography" 
+                });
+            } else {
+                res.render("category", {
+                    title: "#Biography - Books & Purple",
+                    login: "Login",
+                    signup: "Sign Up",
+                    books: results,
+                    bookCategory: "biography" 
+                });
+            }
+        }
+    });
+};
+
+exports.renderBusinessPage = (req, res) => {
+    Display.find({
+        $or:[ {category: "Business & Economics"}, {category: "Businessmen"}]
+    }, function (error, results) {
+        if (error) {
+            res.send(error);
+        } else {
+            if (req.isAuthenticated()) {
+                res.render("category", {
+                    title: "#Business - Books & Purple",
+                    login: "Logout",
+                    signup: req.user.username,
+                    books: results,
+                    bookCategory: "business"
+                });
+            } else {
+                res.render("category", {
+                    title: "#Business - Books & Purple",
+                    login: "Login",
+                    signup: "Sign Up",
+                    books: results,
+                    bookCategory: "business"
+                });
+            }
+        }
+    });
+}
+
+exports.renderFictionPage = (req, res) => {
+    Display.find({
+        category: "Fiction"
+    }, function (error, results) {
+        if (error) {
+            res.send(error);
+        } else {
+            if (req.isAuthenticated()) {
+                res.render("category", {
+                    title: "#Fiction - Books & Purple",
+                    login: "Logout",
+                    signup: req.user.username,
+                    books: results,
+                    bookCategory: "fiction"
+                });
+            } else {
+                res.render("category", {
+                    title: "#Fiction - Books & Purple",
+                    login: "Login",
+                    signup: "Sign Up",
+                    books: results,
+                    bookCategory: "fiction"
+                });
+            }
+        }
+    });
+
+}
+
+exports.renderHistoryPage = (req, res) => {
+    Display.find({
+        category: "History"
+    }, function (error, results) {
+        if (error) {
+            res.send(error);
+        } else {
+            if (req.isAuthenticated()) {
+                res.render("category", {
+                    title: "#History - Books & Purple",
+                    login: "Logout",
+                    signup: req.user.username,
+                    books: results,
+                    bookCategory: "history"
+                });
+            } else {
+                res.render("category", {
+                    title: "#History - Books & Purple",
+                    login: "Login",
+                    signup: "Sign Up",
+                    books: results,
+                    bookCategory: "history"
+                });
+            }
+        }
+    });
+
+}
+
+exports.renderNonFictionPage = (req, res) => {
+    Display.find({
+        $or:[ {category: "Juvenile Nonfiction"}, {category: "Young Adult Nonfiction"}]
+    }, function (error, results) {
+        if (error) {
+            res.send(error);
+        } else {
+            if (req.isAuthenticated()) {
+                res.render("category", {
+                    title: "#Nonfiction - Books & Purple",
+                    login: "Logout",
+                    signup: req.user.username,
+                    books: results,
+                    bookCategory: "non-fiction"
+                });
+            } else {
+                res.render("category", {
+                    title: "#Nonfiction - Books & Purple",
+                    login: "Login",
+                    signup: "Sign Up",
+                    books: results,
+                    bookCategory: "non-fiction"
+                });
+            }
+        }
+    });
+
+}
+
+exports.renderSciencePage = (req, res) => {
+    Display.find({
+        $or:[ {category: "Mathematics"}, {category: "Young Adult Nonfiction"}]
+    }, function (error, results) {
+        if (error) {
+            res.send(error);
+        } else {
+            if (req.isAuthenticated()) {
+                res.render("category", {
+                    title: "#Science - Books & Purple",
+                    login: "Logout",
+                    signup: req.user.username,
+                    books: results,
+                    bookCategory: "Science"
+                });
+            } else {
+                res.render("category", {
+                    title: "#Science - Books & Purple",
+                    login: "Login",
+                    signup: "Sign Up",
+                    books: results,
+                    bookCategory: "Science"
+                });
+            }
+        }
+    });
+
+}
+
+exports.renderSelfHelpPage = (req, res) => {
+    Display.find({
+        category: "Self-Help"
+    }, function (error, results) {
+        if (error) {
+            res.send(error);
+        } else {
+            if (req.isAuthenticated()) {
+                res.render("category", {
+                    title: "#Self-Help - Books & Purple",
+                    login: "Logout",
+                    signup: req.user.username,
+                    books: results,
+                    bookCategory: "self-help"
+                });
+            } else {
+                res.render("category", {
+                    title: "#Self-Help - Books & Purple",
+                    login: "Login",
+                    signup: "Sign Up",
+                    books: results,
+                    bookCategory: "self-help"
+                });
+            }
+        }
+    });
+
+}
+
 
 // =================== For POST Requests =================
 exports.postLoginPage = (req, res) => {
@@ -404,9 +611,11 @@ exports.postComposePage = (req, res) => {
                     userFound.save(function () {
                         console.log("User Post saved!");
                     });
-                    
+
                     // store the post in the submitted posts
-                    Display.findOne({isbn: req.body.isbn}, function(error, existing){
+                    Display.findOne({
+                        isbn: req.body.isbn
+                    }, function (error, existing) {
                         const userPostNew = {
                             reviewTitle: req.body.reviewTitle,
                             review: req.body.bookReview,
@@ -438,7 +647,7 @@ exports.postComposePage = (req, res) => {
                     })
 
                     res.redirect("/");
-                }       
+                }
             }
         })
     } else {

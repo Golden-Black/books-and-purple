@@ -101,8 +101,8 @@
                 <hr>
             </div>
             <% } %>
+            <% } %>
             <!-- This is the right col -->
-            <% if(item === 1) { %>
             <div class="col-md-4-lite order-lg-3 order-sm-0">
                 <header class="card-header">
                     <h4 class="card">Popular Categories </h4>
@@ -110,62 +110,54 @@
                 <div class="text-center mb-3 card-bg-scale position-relative overflow-hidden rounded"
                     style="background-image:url(/img/topics/biography.jpg); background-position: center left; background-size: cover;">
                     <div class="tag-font p-3">
-                        <a href="#" class="stretched-link fw-bold text-white h5">Biography</a>
+                        <a href="/biography" class="stretched-link fw-bold text-white h5">Biography</a>
                     </div>
                 </div>
-
+                
                 <div class="text-center mb-3 card-bg-scale position-relative overflow-hidden rounded"
                     style="background-image:url(/img/topics/business.jpg); background-position: center left; background-size: cover;">
                     <div class="tag-font p-3">
-                        <a href="#" class="stretched-link fw-bold text-white h5">Business</a>
+                        <a href="/business" class="stretched-link fw-bold text-white h5">Business</a>
                     </div>
                 </div>
 
                 <div class="text-center mb-3 card-bg-scale position-relative overflow-hidden rounded"
                     style="background-image:url(/img/topics/fictions.jpg); background-position: center left; background-size: cover;">
                     <div class="tag-font p-3">
-                        <a href="#" class="stretched-link fw-bold text-white h5">Fictions</a>
+                        <a href="/fiction" class="stretched-link fw-bold text-white h5">Fictions</a>
                     </div>
                 </div>
 
                 <div class="text-center mb-3 card-bg-scale position-relative overflow-hidden rounded"
                     style="background-image:url(/img/topics/history.jpg); background-position: center left; background-size: cover;">
                     <div class="tag-font p-3">
-                        <a href="#" class="stretched-link fw-bold text-white h5">History</a>
+                        <a href="/history" class="stretched-link fw-bold text-white h5">History</a>
                     </div>
                 </div>
 
                 <div class="text-center mb-3 card-bg-scale position-relative overflow-hidden rounded"
                     style="background-image:url(/img/topics/non-fiction.jpg); background-position: center left; background-size: cover;">
                     <div class="tag-font p-3">
-                        <a href="#" class="stretched-link fw-bold text-white h5">Non-Fiction</a>
+                        <a href="/nonFiction" class="stretched-link fw-bold text-white h5">Non-Fiction</a>
                     </div>
                 </div>
 
                 <div class="text-center mb-3 card-bg-scale position-relative overflow-hidden rounded"
                     style="background-image:url(/img/topics/science.jpg); background-position: center left; background-size: cover;">
                     <div class="tag-font p-3">
-                        <a href="#" class="stretched-link fw-bold text-white h5">Science</a>
+                        <a href="/science" class="stretched-link fw-bold text-white h5">Science</a>
                     </div>
                 </div>
 
                 <div class="text-center mb-3 card-bg-scale position-relative overflow-hidden rounded"
                     style="background-image:url(/img/topics/self-help.jpg); background-position: center left; background-size: cover;">
                     <div class="tag-font p-3">
-                        <a href="#" class="stretched-link fw-bold text-white h5">Self-Help</a>
+                        <a href="/selfHelp" class="stretched-link fw-bold text-white h5">Self-Help</a>
                     </div>
                 </div>
 
-                <div class="load-more">
-                    <p><a href="#" style="color: rgb(46, 1, 207);">Load All Categories</a></p>
-                </div>
-                <hr>
-
-                <hr>
-
             </div>
-            <% } %>
-        <% } %>
+                  
 
         <% for(var i = 2; i < postings.length; i++) {%>
             <% if(i % 2 === 0){ %>

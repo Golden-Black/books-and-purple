@@ -1,0 +1,47 @@
+<%- include("./partials/headers") -%>
+
+<% if(books.length === 0) { %>
+<div class="container">
+    <div class="row">
+        <h2><%= books %></h2>
+        <h2>Sorry there haven't been any reviews for <%= bookCategory %> books yet. </h2>
+        <br><br>
+        <%- include("./partials/register-footer") -%>
+        <% } %>
+
+        <% for(var i = books.length-1; i >= 0; i--) { %>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="searchResult-a" style="padding-top: 1rem;">
+                            <img class="card-img" src="<%= books[i].imageLink %>" alt=" img unavailable">
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <h4 class="sr-card-title"> <%= books[i].title %> </h4>
+                        <div><a class="author-compose" href="#">&nbsp;<span class="by">by</span>&nbsp;
+                            <%= books[i].authors %> &nbsp;</a></div>
+                            <div class="sr-card-body">
+                                <p class="card-text">
+                                    <span class="sr-description">&nbsp; Description: </span> &nbsp;
+                                    <%= books[i].description %>
+                                </p>
+                            </div>
+                            <div class="sr-card-body">
+                                <p class="card-text">
+                                    <span class="sr-description">&nbsp; Category: </span> &nbsp;
+                                    <%= books[i].category %> <span> &nbsp;</span>
+                                </p>
+                            </div>
+                            <div class="sr-isbn"><%= books[i].isbnType %>: &nbsp; <%= books[i].isbn %> </div>
+                            <br>
+                            <div class="sr-isbn"> <a href="/<%= books[i]._id %>"> Read Reviews</a></div>
+                        </div>
+                    </div>
+                    <hr>
+                    <% if(i === 0) { %>
+                        <%- include("./partials/footers") -%>
+                        <% } %>
+                        
+                    <% } %>
+</div>
