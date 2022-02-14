@@ -40,13 +40,13 @@ Task Stack:
 <ol>
  <li> <strike>Add user email to the database.</strike> </li>
  <li> <strike>Add default posts to show in the index.ejs page.</strike></li>
- <li> Design & implement the category layout. </li>
+ <li> <strike>Design & implement the category layout.</strike> </li>
  <li> Complete 404 Page Routing</li>
 </ol>
 
 <h4>v. 1.0.2</h4>
 <ol>
- <li> Fix the size for search book button. </li>
+ <li> <strike>Fix the size for search book button.</strike></li>
  <li> Add additional user information to the account.ejs page.</li>
  <li> favicon </li>
  <li> Fix the <b>Load More</b> button in the index page in both the posts & the category column. </li>
