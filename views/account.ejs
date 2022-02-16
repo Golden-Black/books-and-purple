@@ -1,7 +1,7 @@
 <%- include("./partials/headers") -%>
 
 <div class="container">
-    
+    <div class="row">
     <div class="col-md-3" style="margin-top:2rem; margin-bottom: 2rem; border-right: 0.5px rgb(182, 181, 181) solid;">
         <br>
         <div class="account-font"><span class="onDisplay">Overview<span></span></div>
@@ -11,10 +11,20 @@
         <br>
         <br>
     </div>
-    <div class="col-md-9">
 
+    <div class="col-md-9 account-font">
+        <br>
+        <div>Username: </div>
+        <div>Email: </div>
+        <div>
+            <form action="/account" method="POST">
+                <label>New Password: </label><input name="newPassword">
+                <lable>Re-enter New Password: </lable><input name="reEnterPassword">
+            </form>
+        </div>     
     </div>
 
+    </div>
     
 </div>
 <%- include("./partials/footers") -%>

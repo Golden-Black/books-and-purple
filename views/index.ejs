@@ -15,7 +15,7 @@
                         border-radius: 12px;" href="#">&nbsp; <%= postings[item].title %> <span class="by">by</span>
                             <%= postings[item].authors %> &nbsp;</a>
                     </header>
-                    <a href="post-image.html">
+                    <a href="/<%= postings[item]._id %>">
                         <img class="card-img" src="<%= postings[item].imageLink %>" alt="" />
                     </a>
                     <div class="card-body">
@@ -63,7 +63,7 @@
                             href="#">&nbsp; <%= postings[item].title %> <span class="by">by</span>
                             <%= postings[item].authors %> &nbsp; </a>
                     </header>
-                    <a href="post-image.html">
+                    <a href="/<%= postings[item]._id %>">
                         <img class="card-img" src="<%= postings[item].imageLink %>" alt="" />
                     </a>
                     <div class="card-body">
@@ -168,7 +168,7 @@
                                 border-radius: 12px;" href="#">&nbsp; <%= postings[i].title %> <span
                                 class="by">by</span> <%= postings[i].authors %> &nbsp;</a>
                     </header>
-                    <a href="post-image.html">
+                    <a href="/<%= postings[i]._id %>">
                         <img class="card-img" src="<%= postings[i].imageLink %>" alt=""/>
                     </a>
                     <div class="card-body">
@@ -216,7 +216,7 @@
                             href="#">&nbsp; <%= postings[x].title %> <span class="by">by</span>
                             <%= postings[x].authors %> &nbsp; </a>
                     </header>
-                    <a href="post-image.html">
+                    <a href="/<%= postings[x]._id %>">
                         <img class="card-img" src="<%= postings[x].imageLink %>" alt="" />
                     </a>
                     <div class="card-body">

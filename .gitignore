@@ -1,0 +1,5 @@
+/node_modules
+/books-and-purple
+npm-debug.log
+.DS_Store
+/*.env
