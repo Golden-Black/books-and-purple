@@ -1,5 +1,8 @@
 # Books-and-Purple
- 
+https://www.booksandpurple.com/
+<br>
+<br>Books & Purple uses Google Book API to perform book searches for registered users, who can then proceed to compose book reviews after the search and post it under the book page. The review will be displayed on both the home page and the specific category page.
+
 Google Books API: 
 ------------------------------
 <ul>
